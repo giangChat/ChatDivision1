@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "375506658290",
+    "project_id": "appchatgiangdivision1",
+    "storage_bucket": "appchatgiangdivision1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375506658290:android:7ed886f7e2d2399836416b",
+        "android_client_info": {
+          "package_name": "com.rikkei.training.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375506658290-2adt7498708l023r3vlcbv91e5c2h2ka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rikkei.training.chat",
+            "certificate_hash": "bb81cfbcc46673713efab255d708a3a15de3fccf"
+          }
+        },
+        {
+          "client_id": "375506658290-n6lhaedrth320av09cskpq2oathvi8b0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0evsc9LUGzkiEEQKouOkiDpwhV0Lzm74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375506658290-n6lhaedrth320av09cskpq2oathvi8b0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
