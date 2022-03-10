@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Chat</string>
+    <string name="Awesome">Trải nghiệm Awesome chat</string>
+    <string name="login">Đăng nhập</string>
+    <string name="LogIn">Đăng Nhập</string>
+    <string name="Regis">Đăng ký</string>
+    <string name="REGIS">ĐĂNG KÝ</string>
+    <string name="email">EMAIL</string>
+    <string name="Password">MẬT KHẨU</string>
+    <string name="forgetPassword">Quên mật khẩu?</string>
+    <string name="FullName">HỌ VÀ TÊN</string>
+    <string name="noAccount">Chưa có tài khoản</string>
+    <string name="realAccount">Đã có tài khoản</string>
+    <string name="message">Tin nhắn</string>
+    <string name="hintSearchMessage">Tìm kiếm tin nhắn...</string>
+    <string name="UserName"></string>
+    <string name="today">Hôm nay</string>
+    <string name="hintMessage">Tìm kiếm bạn bè...</string>
+    <string name="createMessage">Tạo tin nhắn</string>
+    <string name="friends">Bạn bè</string>
+    <string name="cancel">Hủy</string>
+    <string name="noFindKQ">Không tìm thấy kết quả phù hợp</string>
+    <string name="profile">Trang cá nhân</string>
+    <string name="listFriends">DANH SÁCH BẠN BÈ</string>
+    <string name="FRIENDS">BẠN BÈ</string>
+    <string name="AllFriends">TẤT CẢ</string>
+    <string name="ReqFriends">YÊU CẦU</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="notification">Thông báo</string>
+    <string name="versionApplication">Phiên bản ứng dụng</string>
+    <string name="LogOut">Đăng xuất</string>
+    <string name="Birthday">NGÀY SINH</string>
+    <string name="Number">SỐ ĐIỆN THOẠI</string>
+    <string name="EditProfile">Chỉnh sửa thông tin</string>
+    <string name="agreePolicy_Condition">Tôi đồng ý với các chính sánh và điều kiện</string>
 </resources>

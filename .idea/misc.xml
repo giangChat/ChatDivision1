@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/circle.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/language.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/logout.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/version_application.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/activity_main.xml" value="0.11676798378926039" />
-        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/menu/navigation.xml" value="0.15185185185185185" />
       </map>
     </option>
   </component>
