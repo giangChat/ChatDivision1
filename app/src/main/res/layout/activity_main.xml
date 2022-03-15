@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
    <FrameLayout
        android:id="@+id/fragment"
@@ -20,6 +20,6 @@
        app:layout_constraintBottom_toBottomOf="parent"
        app:itemIconTint="@color/custom_color_bottom_navigation"
        app:itemTextColor="@color/custom_color_bottom_navigation"
-       app:menu="@menu/navigation"/>
+       app:menu="@menu/navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

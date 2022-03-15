@@ -33,4 +33,8 @@
     <string name="Number">SỐ ĐIỆN THOẠI</string>
     <string name="EditProfile">Chỉnh sửa thông tin</string>
     <string name="agreePolicy_Condition">Tôi đồng ý với các chính sánh và điều kiện</string>
+    <string name="agree">Đồng ý</string>
+    <string name="inviteFriend">Kết bạn</string>
+    <string name="INVITEFRIEND">LỜI MỜI KẾT BẠN</string>
+    <string name="INVITEDFRIEND">ĐÃ GIỬ KẾT BẠN</string>
 </resources>
