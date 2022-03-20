@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chat</string>
+    <string name="Awesome">Awesome chat experience</string>
+    <string name="login">Log in</string>
+    <string name="LogIn">Log In</string>
+    <string name="Regis">Regis</string>
+    <string name="REGIS">REGIS</string>
+    <string name="email">EMAIL</string>
+    <string name="Password">PASSWORD</string>
+    <string name="forgetPassword">Forget password?</string>
+    <string name="FullName">FULL NAME</string>
+    <string name="noAccount">No have an account</string>
+    <string name="realAccount">Alreadly have an account</string>
+    <string name="message">Message</string>
+    <string name="hintSearchMessage">Search message...</string>
+    <string name="today">Daily</string>
+    <string name="hintMessage">Search friends...</string>
+    <string name="createMessage">Create message</string>
+    <string name="friends">Friends</string>
+    <string name="cancel">Cancel</string>
+    <string name="noFindKQ">No matching results were found</string>
+    <string name="profile">Profile</string>
+    <string name="listFriends">LIST FRIENDS</string>
+    <string name="FRIENDS">FRIENDS</string>
+    <string name="AllFriends">ALL FRIENDS</string>
+    <string name="ReqFriends">REQUEST</string>
+    <string name="language">Language</string>
+    <string name="notification">Notification</string>
+    <string name="versionApplication">Version application</string>
+    <string name="LogOut">Log out</string>
+    <string name="Birthday">BIRTHDAY</string>
+    <string name="Number">PHONE NUMBER</string>
+    <string name="EditProfile">Edit information</string>
+    <string name="agreePolicy_Condition">Tôi đồng ý với các chính sánh và điều kiện</string>
+    <string name="agree">Agree</string>
+    <string name="inviteFriend">Invite</string>
+    <string name="INVITEFRIEND">Invite friends</string>
+    <string name="INVITEDFRIEND">Invited friends</string>
+    <string name="VietNamese">VietNamese</string>
+    <string name="save">Save</string>
+    <string name="English">English</string>
+</resources>

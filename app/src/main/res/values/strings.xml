@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Chat</string>
-    <string name="Awesome">Trải nghiệm Awesome chat</string>
+    <string name="Awesome">Awesome chat experience</string>
     <string name="login">Đăng nhập</string>
     <string name="LogIn">Đăng Nhập</string>
     <string name="Regis">Đăng ký</string>
@@ -13,7 +13,6 @@
     <string name="realAccount">Đã có tài khoản</string>
     <string name="message">Tin nhắn</string>
     <string name="hintSearchMessage">Tìm kiếm tin nhắn...</string>
-    <string name="UserName"></string>
     <string name="today">Hôm nay</string>
     <string name="hintMessage">Tìm kiếm bạn bè...</string>
     <string name="createMessage">Tạo tin nhắn</string>
@@ -37,4 +36,7 @@
     <string name="inviteFriend">Kết bạn</string>
     <string name="INVITEFRIEND">LỜI MỜI KẾT BẠN</string>
     <string name="INVITEDFRIEND">ĐÃ GIỬ KẾT BẠN</string>
+    <string name="VietNamese">Tiếng Việt</string>
+    <string name="save">Lưu</string>
+    <string name="English">English</string>
 </resources>

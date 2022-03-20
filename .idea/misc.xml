@@ -3,15 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/account.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/button_comfirm_friends.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/button_confirm_friend_type2.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/button_x.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/camera.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/cancel.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/circle.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/friend.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/ic_camera.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/language.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/logout.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/next.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/persion.xml" value="0.2703125" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/previous.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/version_application.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/activity_main.xml" value="0.11676798378926039" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/edit_profile_fragment.xml" value="0.264" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_all_friends.xml" value="0.1331521739130435" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_friends_friends.xml" value="0.14221014492753623" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_req_fragment.xml" value="0.264" />
@@ -20,6 +28,7 @@
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/item_friends_friends.xml" value="0.14221014492753623" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/item_sort_name.xml" value="0.12360688956433637" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/message_fragment.xml" value="0.264" />
+        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/profile_fragment.xml" value="0.264" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/menu/navigation.xml" value="0.15185185185185185" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/menu/navigation_friends.xml" value="0.25416666666666665" />
       </map>

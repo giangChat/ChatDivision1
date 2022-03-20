@@ -88,43 +88,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline03">
 
-        <RelativeLayout
+
+        <EditText
+            android:id="@+id/edSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/border_search">
-
-            <EditText
-                android:id="@+id/edSearch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/search"
-                android:hint="@string/hintSearchMessage"
-                android:textColor="#999999"
-                android:textSize="16sp" />
-        </RelativeLayout>
+            android:background="@drawable/border_search"
+            android:drawableStart="@drawable/search"
+            android:hint="@string/hintSearchMessage"
+            android:paddingLeft="15dp"
+            android:textColor="#999999"
+            android:textSize="16sp"
+            android:focusable="true"/>
 
         <TextView
             android:id="@+id/tvCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
             android:text="@string/cancel"
             android:textColor="@color/white"
+            android:visibility="gone"
             android:textSize="16sp" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/bg_conner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline05"
-        android:background="@drawable/bg_conner">
+        app:layout_constraintTop_toTopOf="@id/guideline05">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,49 +129,54 @@
                 android:id="@+id/tabLayoutFriends"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabSelectedTextColor="#4356B4"
-                android:background="@drawable/bg_conner"/>
+                android:background="@drawable/bg_conner"
+                app:tabSelectedTextColor="#4356B4" />
+
             <View
                 android:id="@+id/view"
-                android:background="#8F8A8A"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="#8F8A8A" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerFriends"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
             <TextView
                 android:id="@+id/tvFriendsSearch"
-                android:textColor="#D2D2D2"
-                android:visibility="gone"
-                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/FRIENDS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textColor="#D2D2D2"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvDataSearchFriends"
-                android:layout_marginTop="15dp"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:visibility="gone" />
+
             <ImageView
                 android:id="@+id/imgNoFindSearch"
-                android:src="@drawable/search_gray"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/search_gray" />
+
             <TextView
                 android:id="@+id/tvNoFindSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/noFindKQ"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:text="@string/noFindKQ"
-                android:gravity="center"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

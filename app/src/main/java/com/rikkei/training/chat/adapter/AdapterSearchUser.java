@@ -30,13 +30,15 @@ public class AdapterSearchUser extends RecyclerView.Adapter<AdapterSearchUser.Vi
     private TextView tvFriends;
     private TextView tvNoFindSearch;
     private ImageView imgNoFindSearch;
+    private EditText edSearch;
 
-    public AdapterSearchUser(List<User> userList, Context context, TextView tvFriends, TextView tvNoFindSearch, ImageView imgNoFindSearch) {
+    public AdapterSearchUser(List<User> userList, Context context, TextView tvFriends, TextView tvNoFindSearch, ImageView imgNoFindSearch, EditText edSearch) {
         this.userList = userList;
         this.context = context;
         this.tvFriends = tvFriends;
         this.tvNoFindSearch = tvNoFindSearch;
         this.imgNoFindSearch = imgNoFindSearch;
+        this.edSearch = edSearch;
     }
 
     @NonNull
@@ -86,10 +88,12 @@ public class AdapterSearchUser extends RecyclerView.Adapter<AdapterSearchUser.Vi
                         tvFriends.setVisibility(View.GONE);
                         tvNoFindSearch.setVisibility(View.VISIBLE);
                         imgNoFindSearch.setVisibility(View.VISIBLE);
+                        edSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, 0, 0);
                     } else {
                         tvFriends.setVisibility(View.VISIBLE);
                         tvNoFindSearch.setVisibility(View.GONE);
                         imgNoFindSearch.setVisibility(View.GONE);
+                        edSearch.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, R.drawable.cancel, 0);
                     }
                 }
                 FilterResults filterResults = new FilterResults();
