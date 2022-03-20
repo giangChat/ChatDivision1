@@ -23,14 +23,12 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.adapter.AdapterSearchUser;
 import com.rikkei.training.chat.adapter.ViewPagerFriendsAdapter;
-import com.rikkei.training.chat.modle.StatusFriends;
 import com.rikkei.training.chat.modle.User;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 public class FriendsFragment extends Fragment {
     private MainActivity mainActivity;
@@ -46,6 +44,7 @@ public class FriendsFragment extends Fragment {
     private AdapterSearchUser adapterSearchUser;
     private TextView tvNoFindSearch;
     private ImageView imgNoFindSearch;
+    private TextView tvCancel;
 
     public static Fragment newInstance() {
         Bundle args = new Bundle();
@@ -60,6 +59,8 @@ public class FriendsFragment extends Fragment {
         view = inflater.inflate(R.layout.friends_fragment, container, false);
         init();
         getData();
+        tvNoFindSearch.setVisibility(View.GONE);
+        imgNoFindSearch.setVisibility(View.GONE);
         friendsAdapter = new ViewPagerFriendsAdapter(mainActivity);
         viewPager2.setAdapter(friendsAdapter);
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -99,9 +100,19 @@ public class FriendsFragment extends Fragment {
                 viewPager2.setVisibility(View.GONE);
                 //tvFriends.setVisibility(View.VISIBLE);
                 rcvDataSearchFriends.setVisibility(View.VISIBLE);
-                adapterSearchUser = new AdapterSearchUser(sortUser(userList), mainActivity, tvFriends, tvNoFindSearch, imgNoFindSearch);
+                adapterSearchUser = new AdapterSearchUser(sortUser(userList), mainActivity, tvFriends, tvNoFindSearch, imgNoFindSearch, edSearchFriends);
                 rcvDataSearchFriends.setAdapter(adapterSearchUser);
                 adapterSearchUser.getFilter().filter(edSearchFriends.getText().toString());
+                edSearchFriends.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, R.drawable.cancel, 0);
+                edSearchFriends.setWidth(edSearchFriends.getWidth() - 12 - tvCancel.getWidth());
+                tvCancel.setVisibility(View.VISIBLE);
+                tvCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        edSearchFriends.setText("");
+                        tvCancel.setVisibility(View.GONE);
+                    }
+                });
             }
 
             @Override
@@ -114,6 +125,9 @@ public class FriendsFragment extends Fragment {
                     rcvDataSearchFriends.setVisibility(View.GONE);
                     tvNoFindSearch.setVisibility(View.GONE);
                     imgNoFindSearch.setVisibility(View.GONE);
+                    edSearchFriends.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, 0, 0);
+                    edSearchFriends.setWidth(edSearchFriends.getWidth() + 12 + tvCancel.getWidth());
+                    tvCancel.setVisibility(View.GONE);
                 } else {
                     view2.setVisibility(View.GONE);
                     tabLayout.setVisibility(View.GONE);
@@ -121,6 +135,16 @@ public class FriendsFragment extends Fragment {
                     //tvFriends.setVisibility(View.VISIBLE);
                     rcvDataSearchFriends.setVisibility(View.VISIBLE);
                     adapterSearchUser.getFilter().filter(edSearchFriends.getText().toString());
+                    edSearchFriends.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, R.drawable.cancel, 0);
+                    edSearchFriends.setWidth(edSearchFriends.getWidth() - 12 - tvCancel.getWidth());
+                    tvCancel.setVisibility(View.VISIBLE);
+                    tvCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            edSearchFriends.setText("");
+                            tvCancel.setVisibility(View.GONE);
+                        }
+                    });
                 }
             }
         });
@@ -182,7 +206,8 @@ public class FriendsFragment extends Fragment {
         view2 = view.findViewById(R.id.view);
         tvFriends = view.findViewById(R.id.tvFriendsSearch);
         rcvDataSearchFriends = view.findViewById(R.id.rcvDataSearchFriends);
-        tvNoFindSearch=view.findViewById(R.id.tvNoFindSearch);
-        imgNoFindSearch=view.findViewById(R.id.imgNoFindSearch);
+        tvNoFindSearch = view.findViewById(R.id.tvNoFindSearch);
+        imgNoFindSearch = view.findViewById(R.id.imgNoFindSearch);
+        tvCancel = view.findViewById(R.id.tvCancel);
     }
 }
