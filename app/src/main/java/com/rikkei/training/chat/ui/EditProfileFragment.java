@@ -119,7 +119,6 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d("Giang",permissions.toString());
         switch (requestCode){
             case REQUEST_CODE_CAMERA:{
                 if(grantResults.length>1
@@ -177,6 +176,5 @@ public class EditProfileFragment extends Fragment {
         edName=view.findViewById(R.id.edName);
         edNumber=view.findViewById(R.id.edNumber);
         edBirthday=view.findViewById(R.id.edBirthday);
-
     }
 }
