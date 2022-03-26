@@ -5,161 +5,169 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline01"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/guideline01"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/butBackProfile"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/previous"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/butBackProfile"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="12dp"
-            android:src="@drawable/previous" />
+    <TextView
+        android:id="@+id/tvSaveInfoUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="12dp"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/EditProfile"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSaveInfoUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="12dp"
-            android:text="@string/save"
-            android:textColor="@color/white"
-            android:textSize="19sp" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/EditProfile"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvSaveInfoUser"
+        app:layout_constraintStart_toEndOf="@+id/butBackProfile"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_conner"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline01">
+        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgUpdateUser"
-                android:layout_marginTop="42dp"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/bg" />
+                android:layout_marginTop="42dp"
+                android:src="@drawable/bg"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/imgCamera"
-                android:layout_marginTop="-35dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_camera"/>
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="-30dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgUpdateUser" />
 
             <TextView
+                android:id="@+id/tvFullName"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/FullName"
                 android:textColor="#999999"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@+id/imgUpdateUser" />
 
             <EditText
                 android:id="@+id/edName"
-                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_marginLeft="25dp"
-                android:padding="0dp"
-                android:background="@color/white"
-                android:text="Vu Truong Giang"
                 android:layout_marginTop="9dp"
                 android:layout_marginRight="25dp"
-                android:drawableEnd="@drawable/persion" />
+                android:background="@color/white"
+                android:drawableEnd="@drawable/persion"
+                android:padding="0dp"
+                android:text="Vu Truong Giang"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/tvFullName" />
 
             <View
+                android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="25dp"
-                android:background="#D2D2D2" />
+                android:background="#D2D2D2"
+                app:layout_constraintTop_toBottomOf="@id/edName" />
+
             <TextView
+                android:id="@+id/tvNumberPhone"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/Number"
                 android:textColor="#999999"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
 
             <EditText
                 android:id="@+id/edNumber"
-                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:padding="0dp"
-                android:background="@color/white"
-                android:text="Vu Truong Giang"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginRight="25dp"
-                android:drawableEnd="@drawable/phone" />
+                android:background="@color/white"
+                android:drawableEnd="@drawable/phone"
+                android:padding="0dp"
+                android:text="Vu Truong Giang"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tvNumberPhone" />
 
             <View
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="25dp"
-                android:background="#D2D2D2" />
+                android:background="#D2D2D2"
+                app:layout_constraintTop_toBottomOf="@+id/edNumber" />
+
             <TextView
+                android:id="@+id/tvBirthday"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/Birthday"
                 android:textColor="#999999"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <EditText
                 android:id="@+id/edBirthday"
-                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:padding="0dp"
-                android:background="@color/white"
-                android:text="dd/MM/yyyy"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginRight="25dp"
-                android:drawableEnd="@drawable/birthday" />
+                android:background="@color/white"
+                android:drawableEnd="@drawable/birthday"
+                android:padding="0dp"
+                android:text="dd/MM/yyyy"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tvBirthday" />
 
             <View
                 android:layout_width="match_parent"
@@ -167,7 +175,8 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="25dp"
-                android:background="#D2D2D2" />
-        </LinearLayout>
+                android:background="#D2D2D2"
+                app:layout_constraintTop_toBottomOf="@id/edBirthday" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
