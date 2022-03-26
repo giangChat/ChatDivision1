@@ -10,7 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.rikkei.training.chat.R;
+import com.rikkei.training.chat.modle.StatusFriends;
 import com.rikkei.training.chat.modle.User;
 
 import java.util.List;
@@ -20,6 +26,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterReqAgreeFriends extends RecyclerView.Adapter<AdapterReqAgreeFriends.ViewHolder> {
     List<User> userList;
     Context context;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseUser userCurrent;
 
     public AdapterReqAgreeFriends(List<User> userList, Context context) {
         this.userList = userList;
@@ -39,9 +48,22 @@ public class AdapterReqAgreeFriends extends RecyclerView.Adapter<AdapterReqAgree
         User user=userList.get(position);
         if (user==null)
             return;
+        if (!user.getImgUrl().trim().equals("default")) {
+            Glide.with(context).load(user.getImgUrl()).into(holder.imgUser);
+        }
         holder.tvUserName.setText(user.getFullName());
         holder.tvNameFirst.setVisibility(View.GONE);
         holder.butConfirm.setText("Đồng ý");
+        holder.butConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseDatabase=FirebaseDatabase.getInstance();
+                databaseReference=firebaseDatabase.getReference();
+                userCurrent= FirebaseAuth.getInstance().getCurrentUser();
+                databaseReference.child("friend").child(userCurrent.getUid()).child(user.getId()).child("status").setValue("friend");
+                databaseReference.child("friend").child(user.getId()).child(userCurrent.getUid()).child("status").setValue("friend");
+            }
+        });
     }
 
     @Override

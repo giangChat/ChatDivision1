@@ -32,9 +32,11 @@ public class SlapshActivity extends AppCompatActivity {
         if (user == null) {
             Intent intent = new Intent(this, LoginRegisterActivity.class);
             startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(this, LoginRegisterActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

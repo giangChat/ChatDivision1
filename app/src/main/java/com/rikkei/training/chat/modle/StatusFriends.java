@@ -1,23 +1,33 @@
 package com.rikkei.training.chat.modle;
 
 public class StatusFriends {
-    private String email;
+    private String id;
     private String status;
+    private String idChat;
 
-    public StatusFriends(String email, String status) {
-        this.email = email;
+    public StatusFriends(String id, String status, String idChat) {
+        this.id = id;
         this.status = status;
+        this.idChat = idChat;
     }
 
     public StatusFriends() {
     }
 
-    public String getEmail() {
-        return email;
+    public String getIdChat() {
+        return idChat;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdChat(String idChat) {
+        this.idChat = idChat;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getStatus() {

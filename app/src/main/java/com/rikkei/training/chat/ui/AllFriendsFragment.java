@@ -1,16 +1,27 @@
 package com.rikkei.training.chat.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.adapter.AdapterAllFriends;
 import com.rikkei.training.chat.modle.StatusFriends;
@@ -26,11 +37,13 @@ public class AllFriendsFragment extends Fragment {
     List<StatusFriends> statusFriendsList;
     View view;
     RecyclerView rcvDataAllFriends;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseUser user;
+    AdapterAllFriends adapterAllFriends;
 
     public static Fragment newInstance() {
-
         Bundle args = new Bundle();
-
         AllFriendsFragment fragment = new AllFriendsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -41,11 +54,16 @@ public class AllFriendsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_all_friends, container, false);
         init();
-        getData();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        rcvDataAllFriends.setLayoutManager(layoutManager);
-        AdapterAllFriends adapterAllFriends = new AdapterAllFriends(getAllFriends(), getFriendsFriends(), getContext());
-        rcvDataAllFriends.setAdapter(adapterAllFriends);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+            }
+        },2000);
         return view;
     }
 
@@ -54,47 +72,46 @@ public class AllFriendsFragment extends Fragment {
     }
 
     public void getData() {
-        //TODO Remove
-        statusFriendsList = new ArrayList<>();
         userList = new ArrayList<>();
-        User user = new User("Vu Giang", "", "", "", "vugiang@gmail.com", "123");
-        User user1 = new User("Vu Anh", "", "", "", "vuanh@gmail.com", "123");
-        User user2 = new User("Vu An", "", "", "", "vuan@gmail.com", "123");
-        User user3 = new User("Vu Duc", "", "", "", "vuduc@gmail.com", "123");
-        User user4 = new User("Vu Hoa", "", "", "", "vuhoa@gmail.com", "123");
-        User user5 = new User("Vu Ha", "", "", "", "vuha@gmail.com", "123");
-        User user6 = new User("Vu Cuong", "", "", "", "vucuong@gmail.com", "123");
-        User user7 = new User("Vu Tung", "", "", "", "vutung@gmail.com", "123");
-        User user8 = new User("Vu Manh", "", "", "", "vumanh@gmail.com", "123");
-        User user9 = new User("Vu Kien", "", "", "", "vukien@gmail.com", "123");
-        User user10 = new User("Vu Tuan", "", "", "", "vutuan@gmail.com", "123");
-        userList.add(user);
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
-        userList.add(user5);
-        userList.add(user6);
-        userList.add(user7);
-        userList.add(user8);
-        userList.add(user9);
-        userList.add(user10);
-        StatusFriends statusFriends = new StatusFriends("vuanh@gmail.com", "friend");
-        StatusFriends statusFriends1 = new StatusFriends("vugiang@gmail.com", "invite friend");
-        StatusFriends statusFriends2 = new StatusFriends("vuanh@gmail.com", "agree");
-        StatusFriends statusFriends3 = new StatusFriends("vucuong@gmail.com", "agree");
-        StatusFriends statusFriends4 = new StatusFriends("vuha@gmail.com", "friend");
-        StatusFriends statusFriends5 = new StatusFriends("vutuan@gmail.com", "friend");
-        StatusFriends statusFriends6 = new StatusFriends("vukien@gmail.com", "friend");
-        StatusFriends statusFriends7 = new StatusFriends("vutung@gmail.com", "friend");
-        statusFriendsList.add(statusFriends);
-        statusFriendsList.add(statusFriends1);
-        statusFriendsList.add(statusFriends2);
-        statusFriendsList.add(statusFriends3);
-        statusFriendsList.add(statusFriends4);
-        statusFriendsList.add(statusFriends5);
-        statusFriendsList.add(statusFriends6);
-        statusFriendsList.add(statusFriends7);
+        statusFriendsList=new ArrayList<>();
+        databaseReference.child("user").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList.clear();
+                Iterable<DataSnapshot> dataSnapshotIterable = snapshot.getChildren();
+                for (DataSnapshot data : dataSnapshotIterable) {
+                    User user1 = data.getValue(User.class);
+                    if (!user1.getId().equals(user.getUid()))
+                        userList.add(user1);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        statusFriendsList = new ArrayList<>();
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference();
+        databaseReference1.child("friend").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                statusFriendsList.clear();
+                Iterable<DataSnapshot> dataSnapshotIterable = snapshot.getChildren();
+                for (DataSnapshot data : dataSnapshotIterable) {
+                    StatusFriends statusFriends = data.getValue(StatusFriends.class);
+                    statusFriendsList.add(statusFriends);
+                }
+                userList = sortUser(userList);
+                adapterAllFriends = new AdapterAllFriends(userList, statusFriendsList, getContext());
+                rcvDataAllFriends.setAdapter(adapterAllFriends);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public List<User> sortUser(List<User> userList) {
@@ -107,22 +124,10 @@ public class AllFriendsFragment extends Fragment {
         };
         Collections.sort(userList, comparator);
         for (User u : userList) {
-            users.add(u);
+            if (!u.getId().equals(user.getUid()))
+                users.add(u);
         }
         return users;
-    }
-
-    public List<StatusFriends> getFriendsFriends() {
-        List<StatusFriends> statusFriendsList1 = new ArrayList<>();
-        for (StatusFriends s : statusFriendsList) {
-            if (s.getStatus().equals("friend"))
-                statusFriendsList1.add(s);
-        }
-        return statusFriendsList1;
-    }
-
-    public List<User> getAllFriends() {
-        return sortUser(userList);
     }
 
     public String getName(String fullName) {

@@ -165,8 +165,8 @@ public class RegisterFragment extends Fragment {
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            User user1 = new User(edtName.getText().toString(),
-                                    "", "", "", edtEmail.getText().toString(),
+                            User user1 = new User(user.getUid(),edtName.getText().toString(),
+                                    "default", "default", "default", edtEmail.getText().toString(),
                                     edtPass.getText().toString());
                             ref.child("user").child(user.getUid()).setValue(user1);
 

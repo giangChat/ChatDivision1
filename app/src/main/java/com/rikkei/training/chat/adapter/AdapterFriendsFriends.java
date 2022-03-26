@@ -43,8 +43,9 @@ public class AdapterFriendsFriends extends RecyclerView.Adapter<AdapterFriendsFr
         holder.tvUserName.setText(user.getFullName());
 
         holder.butConfirm.setVisibility(View.GONE);
-//        if (user.getImgUrl() != null)
-//            Glide.with(context).load(user.getImgUrl()).into(holder.imgUser);
+        if (!user.getImgUrl().trim().equals("default")) {
+            Glide.with(context).load(user.getImgUrl()).into(holder.imgUser);
+        }
         String name=getName(user.getFullName()).charAt(0)+"";
         if(position==0){
             holder.tvNameFirst.setText(name);

@@ -1,6 +1,7 @@
 package com.rikkei.training.chat.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,20 +21,30 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.adapter.AdapterSearchUser;
 import com.rikkei.training.chat.adapter.ViewPagerFriendsAdapter;
+import com.rikkei.training.chat.modle.StatusFriends;
 import com.rikkei.training.chat.modle.User;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class FriendsFragment extends Fragment {
     private MainActivity mainActivity;
     private View view;
-    private List<User> userList;
+    public List<User> userList;
+    List<StatusFriends> statusFriendsList;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private ViewPagerFriendsAdapter friendsAdapter;
@@ -45,6 +56,10 @@ public class FriendsFragment extends Fragment {
     private TextView tvNoFindSearch;
     private ImageView imgNoFindSearch;
     private TextView tvCancel;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     public static Fragment newInstance() {
         Bundle args = new Bundle();
@@ -58,29 +73,66 @@ public class FriendsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.friends_fragment, container, false);
         init();
-        getData();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+//        Handler handler=new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                getData();
+//            }
+//        },2000);
         tvNoFindSearch.setVisibility(View.GONE);
         imgNoFindSearch.setVisibility(View.GONE);
-        friendsAdapter = new ViewPagerFriendsAdapter(mainActivity);
+        getData();
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(FriendFriendsFragment.newInstance());
+        fragmentList.add(AllFriendsFragment.newInstance());
+        fragmentList.add(ReqFriendsFragment.newInstance());
+        friendsAdapter = new ViewPagerFriendsAdapter(mainActivity, fragmentList);
         viewPager2.setAdapter(friendsAdapter);
-        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position) {
-                    case 0:
-                        tab.setText(getContext().getString(R.string.FRIENDS));
-                        break;
-                    case 1:
-                        tab.setText(getContext().getString(R.string.AllFriends));
-                        break;
-                    case 2:
-                        tab.setText(getContext().getString(R.string.ReqFriends));
-                        break;
-                }
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText(requireContext().getString(R.string.FRIENDS));
+                    break;
+                case 1:
+                    tab.setText(getResources().getString(R.string.AllFriends));
+                    break;
+                case 2:
+                    tab.setText(getResources().getString(R.string.ReqFriends));
+                    break;
             }
         }).attach();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mainActivity, RecyclerView.VERTICAL, false);
-        rcvDataSearchFriends.setLayoutManager(layoutManager);
+
+        return view;
+    }
+
+    public void getData() {
+        userList = new ArrayList<>();
+        databaseReference.child("user").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList.clear();
+                Iterable<DataSnapshot> dataSnapshotIterable = snapshot.getChildren();
+                for (DataSnapshot data : dataSnapshotIterable) {
+                    User user1 = data.getValue(User.class);
+                    userList.add(user1);
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mainActivity, RecyclerView.VERTICAL, false);
+                rcvDataSearchFriends.setLayoutManager(layoutManager);
+                search();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void search() {
         edSearchFriends.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -98,21 +150,11 @@ public class FriendsFragment extends Fragment {
                 view2.setVisibility(View.GONE);
                 tabLayout.setVisibility(View.GONE);
                 viewPager2.setVisibility(View.GONE);
-                //tvFriends.setVisibility(View.VISIBLE);
                 rcvDataSearchFriends.setVisibility(View.VISIBLE);
                 adapterSearchUser = new AdapterSearchUser(sortUser(userList), mainActivity, tvFriends, tvNoFindSearch, imgNoFindSearch, edSearchFriends);
                 rcvDataSearchFriends.setAdapter(adapterSearchUser);
                 adapterSearchUser.getFilter().filter(edSearchFriends.getText().toString());
                 edSearchFriends.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, R.drawable.cancel, 0);
-                edSearchFriends.setWidth(edSearchFriends.getWidth() - 12 - tvCancel.getWidth());
-                tvCancel.setVisibility(View.VISIBLE);
-                tvCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        edSearchFriends.setText("");
-                        tvCancel.setVisibility(View.GONE);
-                    }
-                });
             }
 
             @Override
@@ -126,8 +168,6 @@ public class FriendsFragment extends Fragment {
                     tvNoFindSearch.setVisibility(View.GONE);
                     imgNoFindSearch.setVisibility(View.GONE);
                     edSearchFriends.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, 0, 0);
-                    edSearchFriends.setWidth(edSearchFriends.getWidth() + 12 + tvCancel.getWidth());
-                    tvCancel.setVisibility(View.GONE);
                 } else {
                     view2.setVisibility(View.GONE);
                     tabLayout.setVisibility(View.GONE);
@@ -136,46 +176,9 @@ public class FriendsFragment extends Fragment {
                     rcvDataSearchFriends.setVisibility(View.VISIBLE);
                     adapterSearchUser.getFilter().filter(edSearchFriends.getText().toString());
                     edSearchFriends.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.search, 0, R.drawable.cancel, 0);
-                    edSearchFriends.setWidth(edSearchFriends.getWidth() - 12 - tvCancel.getWidth());
-                    tvCancel.setVisibility(View.VISIBLE);
-                    tvCancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            edSearchFriends.setText("");
-                            tvCancel.setVisibility(View.GONE);
-                        }
-                    });
                 }
             }
         });
-        return view;
-    }
-
-    public void getData() {
-        //TODO Remove
-        userList = new ArrayList<>();
-        User user = new User("Vu Giang", "", "", "", "vugiang@gmail.com", "123");
-        User user1 = new User("Vu Anh", "", "", "", "vuanh@gmail.com", "123");
-        User user2 = new User("Vu An", "", "", "", "vuan@gmail.com", "123");
-        User user3 = new User("Vu Duc", "", "", "", "vuduc@gmail.com", "123");
-        User user4 = new User("Vu Hoa", "", "", "", "vuhoa@gmail.com", "123");
-        User user5 = new User("Vu Ha", "", "", "", "vuha@gmail.com", "123");
-        User user6 = new User("Vu Cuong", "", "", "", "vucuong@gmail.com", "123");
-        User user7 = new User("Vu Tung", "", "", "", "vutung@gmail.com", "123");
-        User user8 = new User("Vu Manh", "", "", "", "vumanh@gmail.com", "123");
-        User user9 = new User("Vu Kien", "", "", "", "vukien@gmail.com", "123");
-        User user10 = new User("Vu Tuan", "", "", "", "vutuan@gmail.com", "123");
-        userList.add(user);
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
-        userList.add(user5);
-        userList.add(user6);
-        userList.add(user7);
-        userList.add(user8);
-        userList.add(user9);
-        userList.add(user10);
     }
 
     public List<User> sortUser(List<User> userList) {
@@ -188,7 +191,8 @@ public class FriendsFragment extends Fragment {
         };
         Collections.sort(userList, comparator);
         for (User u : userList) {
-            users.add(u);
+            if (!u.getId().equals(user.getUid()))
+                users.add(u);
         }
         return users;
     }

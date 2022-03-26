@@ -1,23 +1,33 @@
 package com.rikkei.training.chat.modle;
 
 public class User {
+    private String id;
     private String fullName;
     private String numberPhone;
-    private String birthday;
+    private String birthDay;
     private String imgUrl;
     private String email;
-    private String password;
+    private String passWord;
 
-    public User(String fullName, String numberPhone, String birthday, String imgUrl, String email, String password) {
+    public User(String id, String fullName, String numberPhone, String birthDay, String imgUrl, String email, String passWord) {
+        this.id=id;
         this.fullName = fullName;
         this.numberPhone = numberPhone;
-        this.birthday = birthday;
+        this.birthDay = birthDay;
         this.imgUrl = imgUrl;
         this.email = email;
-        this.password = password;
+        this.passWord = passWord;
     }
 
     public User() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -36,12 +46,12 @@ public class User {
         this.numberPhone = numberPhone;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getBirthDay() {
+        return birthDay;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setBirthDay(String birthday) {
+        this.birthDay = birthday;
     }
 
     public String getImgUrl() {
@@ -60,11 +70,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassWord(String password) {
+        this.passWord = password;
     }
 }

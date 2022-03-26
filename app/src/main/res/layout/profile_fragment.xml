@@ -4,27 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline01"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline02"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
-
     <ImageView
         android:id="@+id/imgProfileUser"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:scaleType="fitXY"
         android:src="@drawable/bg"
-        app:layout_constraintBottom_toBottomOf="@id/guideline02"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,227 +18,230 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/bg_conner"
+        android:layout_marginTop="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline01">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgUser"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:src="@drawable/bg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvAwesomeChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="38dp"
+                android:text="Awesome chat"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgUser"/>
+
+            <TextView
+                android:id="@+id/tvEmailUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvAwesomeChat"
+                android:layout_marginLeft="12dp"
+                android:text="abc@gmail.com"
+                android:textColor="#999999"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/tvAwesomeChat"
+                app:layout_constraintStart_toEndOf="@id/imgUser"/>
+
+            <ImageView
+                android:id="@+id/imgEditProfile"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="38dp"/>
+            <View
+                android:id="@+id/view1"
+                app:layout_constraintTop_toBottomOf="@id/imgUser"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="130dp">
+                android:layout_height="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="#EFEEEE" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgUser"
-                    android:layout_width="69dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="12dp"
-                    android:src="@drawable/bg" />
+            <ImageView
+                android:id="@+id/imgLanguage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/language"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1"/>
 
-                <TextView
-                    android:id="@+id/tvAwesomeChat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/imgUser"
-                    android:paddingTop="38dp"
-                    android:text="Awesome chat"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvLanguageTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:text="@string/language"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/imgLanguage"
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                android:layout_marginTop="25dp"/>
 
-                <TextView
-                    android:id="@+id/tvEmailUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvAwesomeChat"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/imgUser"
-                    android:text="abc@gmail.com"
-                    android:textColor="#999999"
-                    android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/imgButChooseLanguage"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                android:layout_marginTop="28dp"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/next" />
 
-                <ImageView
-                    android:id="@+id/imgEditProfile"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="12dp"
-                    android:src="@drawable/edit" />
+            <TextView
+                android:id="@+id/tvLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/imgButChooseLanguage"
+                app:layout_constraintTop_toBottomOf="@id/view1"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="14dp"
+                android:text="@string/VietNamese"
+                android:textColor="#4356B4"
+                android:textSize="19sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#EFEEEE" />
-            </RelativeLayout>
-
-            <RelativeLayout
+            <View
+                android:id="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@id/tvLanguage"
+                android:layout_marginTop="25dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="1dp"
+                android:layout_marginLeft="54dp"
+                android:layout_marginRight="12dp"
+                android:background="#EFEEEE" />
 
-                <ImageView
-                    android:id="@+id/imgLanguage"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="12dp"
-                    android:src="@drawable/language" />
+            <ImageView
+                android:id="@+id/imgNotification"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/notification" />
 
-                <TextView
-                    android:id="@+id/tvLanguageTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@+id/imgLanguage"
-                    android:text="@string/language"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tvNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                app:layout_constraintStart_toEndOf="@id/imgNotification"
+                android:layout_marginLeft="18dp"
+                android:text="@string/notification"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-                <ImageView
-                    android:id="@+id/imgButChooseLanguage"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="12dp"
-                    android:src="@drawable/next" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/next" />
 
-                <TextView
-                    android:id="@+id/tvLanguage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="14dp"
-                    android:layout_toLeftOf="@+id/imgButChooseLanguage"
-                    android:text="@string/VietNamese"
-                    android:textColor="#4356B4"
-                    android:textSize="19sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="54dp"
-                    android:layout_marginRight="12dp"
-                    android:background="#EFEEEE" />
-            </RelativeLayout>
-
-            <RelativeLayout
+            <View
+                android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="1dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintTop_toBottomOf="@id/tvNotification"
+                android:layout_marginLeft="54dp"
+                android:layout_marginRight="12dp"
+                android:background="#EFEEEE" />
 
-                <ImageView
-                    android:id="@+id/imgNotification"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="12dp"
-                    android:src="@drawable/notification" />
+            <ImageView
+                android:id="@+id/imgVersionApp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view3"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/version_application" />
 
-                <TextView
-                    android:id="@+id/tvNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@+id/imgNotification"
-                    android:text="@string/notification"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tvVersionApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toEndOf="@+id/imgVersionApp"
+                app:layout_constraintTop_toBottomOf="@id/view3"
+                android:layout_marginLeft="18dp"
+                android:text="@string/versionApplication"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="12dp"
-                    android:src="@drawable/next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view3"
+                android:layout_marginRight="12dp"
+                android:text="1.0.0"
+                android:textColor="#999999"
+                android:textSize="19sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="54dp"
-                    android:layout_marginRight="12dp"
-                    android:background="#EFEEEE" />
-            </RelativeLayout>
-
-            <RelativeLayout
+            <View
+                android:id="@+id/view4"
+                app:layout_constraintTop_toBottomOf="@id/imgVersionApp"
+                android:layout_marginTop="25dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:background="#EFEEEE" />
 
-                <ImageView
-                    android:id="@+id/imgVersionApp"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="12dp"
-                    android:src="@drawable/version_application" />
+            <ImageView
+                android:id="@+id/imgLogout"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view4"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/logout" />
 
-                <TextView
-                    android:id="@+id/tvVersionApp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@+id/imgVersionApp"
-                    android:text="@string/versionApplication"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="12dp"
-                    android:text="1.0.0"
-                    android:textColor="#999999"
-                    android:textSize="19sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:id="@+id/imgLogout"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="12dp"
-                    android:src="@drawable/logout" />
-
-                <TextView
-                    android:id="@+id/tvLogout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@+id/imgLogout"
-                    android:text="@string/LogOut"
-                    android:textColor="#CF0E0E"
-                    android:textSize="18sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:layout_alignParentTop="true"
-                    android:background="#EFEEEE" />
-            </RelativeLayout>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tvLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toEndOf="@id/imgLogout"
+                app:layout_constraintTop_toBottomOf="@id/view4"
+                android:text="@string/LogOut"
+                android:textColor="#CF0E0E"
+                android:textSize="18sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

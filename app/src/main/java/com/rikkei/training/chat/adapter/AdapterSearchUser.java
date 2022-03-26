@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.modle.User;
@@ -54,6 +55,9 @@ public class AdapterSearchUser extends RecyclerView.Adapter<AdapterSearchUser.Vi
         User user = userList.get(position);
         if (user == null)
             return;
+        if (!user.getImgUrl().trim().equals("default")) {
+            Glide.with(context).load(user.getImgUrl()).into(holder.imgUser);
+        }
         holder.tvUserName.setText(user.getFullName());
         holder.butConfirm.setVisibility(View.GONE);
         holder.tvNameFirst.setVisibility(View.GONE);
