@@ -212,6 +212,5 @@ public class FriendsFragment extends Fragment {
         rcvDataSearchFriends = view.findViewById(R.id.rcvDataSearchFriends);
         tvNoFindSearch = view.findViewById(R.id.tvNoFindSearch);
         imgNoFindSearch = view.findViewById(R.id.imgNoFindSearch);
-        tvCancel = view.findViewById(R.id.tvCancel);
     }
 }

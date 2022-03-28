@@ -8,16 +8,26 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rikkei.training.chat.R;
 
 import java.util.Locale;
@@ -28,7 +38,7 @@ public class ProfileFragment extends Fragment {
     private View view;
     CircleImageView imgUser;
     TextView tvEmailUser;
-    ImageView imgEditProfile;
+    ImageView imgEditProfile,imgUser1;
     TextView tvLanguage;
     TextView tvLogout;
     ImageView imgButChooseLanguage;
@@ -39,6 +49,9 @@ public class ProfileFragment extends Fragment {
     private static final String ENGLISH_CODE = "en";
     private static final String VN_CODE = "vi";
     AlertDialog alertDialog;
+    FirebaseUser user;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     public static Fragment newInstance() {
 
@@ -54,6 +67,36 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.profile_fragment, container, false);
         init();
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference().child("user").child(user.getUid());
+        databaseReference.child("imgUrl").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.getValue().toString().equals("default")){
+                    Glide.with(mainActivity).load(snapshot.getValue()).into(imgUser);
+                    Glide.with(mainActivity).load(snapshot.getValue()).into(imgUser1);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(mainActivity,"Error Loading...",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        databaseReference.child("email").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tvEmailUser.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         mainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
         imgEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +132,7 @@ public class ProfileFragment extends Fragment {
     public void init() {
         mainActivity = (MainActivity) getActivity();
         imgUser = view.findViewById(R.id.imgUser);
-        imgEditProfile = view.findViewById(R.id.imgEditProfile);
+        imgEditProfile = view.findViewById(R.id.imgGoToEditProfile);
         tvEmailUser = view.findViewById(R.id.tvEmailUser);
         tvLanguage = view.findViewById(R.id.tvLanguage);
         tvLogout = view.findViewById(R.id.tvLogout);
@@ -97,21 +140,27 @@ public class ProfileFragment extends Fragment {
         tvNotification = view.findViewById(R.id.tvNotification);
         tvLanguageTitle = view.findViewById(R.id.tvLanguageTitle);
         tvVersionApp = view.findViewById(R.id.tvVersionApp);
+        imgUser1=view.findViewById(R.id.imgUser1);
     }
 
     public void changeLanguage(String language) {
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Resources resources = mainActivity.getResources();
-        Configuration configuration = mainActivity.getResources().getConfiguration();
-        configuration.setLocale(locale);
-        mainActivity.createConfigurationContext(configuration);
-        resources.updateConfiguration(configuration,resources.getDisplayMetrics());
-        if (language.equals(ENGLISH_CODE))
-            tvLanguage.setText(resources.getString(R.string.English));
-        else
-            tvLanguage.setText(resources.getString(R.string.VietNamese));
-        mainActivity.setEditor(language);
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Locale locale = new Locale(language);
+                Locale.setDefault(locale);
+                Resources resources = mainActivity.getResources();
+                Configuration configuration = mainActivity.getResources().getConfiguration();
+                configuration.setLocale(locale);
+                mainActivity.createConfigurationContext(configuration);
+                resources.updateConfiguration(configuration,resources.getDisplayMetrics());
+                if (language.equals(ENGLISH_CODE))
+                    tvLanguage.setText(resources.getString(R.string.English));
+                else
+                    tvLanguage.setText(resources.getString(R.string.VietNamese));
+            }
+        },1000);
         Intent intent = mainActivity.getIntent();
         mainActivity.finish();
         startActivity(intent);

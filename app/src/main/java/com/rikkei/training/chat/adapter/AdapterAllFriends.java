@@ -52,7 +52,6 @@ public class AdapterAllFriends extends RecyclerView.Adapter<AdapterAllFriends.Vi
         if (user == null)
             return;
         holder.tvUserName.setText(user.getFullName());
-        holder.butConfirm.setVisibility(View.GONE);
         if (!user.getImgUrl().trim().equals("default")) {
             Glide.with(context).load(user.getImgUrl()).into(holder.imgUser);
         }
