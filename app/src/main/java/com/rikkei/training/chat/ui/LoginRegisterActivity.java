@@ -21,14 +21,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
     }
 
-    public void goToRegisterFragment() {
-        setFragment(new RegisterFragment());
+    public void goToFragment(Fragment fragment) {
+        setFragment(fragment);
     }
-
-    public void goToLoginFragment() {
-        setFragment(new LoginFragment());
-    }
-
     public void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

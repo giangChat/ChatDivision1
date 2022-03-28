@@ -114,7 +114,7 @@ public class LoginFragment extends Fragment {
         tvDK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginRegisterActivity.goToRegisterFragment();
+                loginRegisterActivity.goToFragment(new RegisterFragment());
             }
         });
 
@@ -132,7 +132,6 @@ public class LoginFragment extends Fragment {
                 } else {
 
                 }
-
             }
         });
     }

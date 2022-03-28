@@ -31,8 +31,6 @@ import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.modle.User;
 
 
-
-
 public class RegisterFragment extends Fragment {
 
     TextView tvDK;
@@ -149,7 +147,7 @@ public class RegisterFragment extends Fragment {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginRegisterActivity.goToLoginFragment();
+                loginRegisterActivity.goToFragment(new LoginFragment());
             }
         });
 
