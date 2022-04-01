@@ -1,5 +1,6 @@
 package com.rikkei.training.chat.ui;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,12 @@ import com.google.firebase.database.annotations.NotNull;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.modle.User;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 
 public class RegisterFragment extends Fragment {
 
@@ -41,6 +49,7 @@ public class RegisterFragment extends Fragment {
     LoginRegisterActivity loginRegisterActivity;
     FirebaseDatabase db;
     DatabaseReference ref;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -153,6 +162,7 @@ public class RegisterFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void onClickSignUp() {
         String email = edtEmail.getText().toString().trim();
         String password = edtPass.getText().toString().trim();
@@ -163,7 +173,7 @@ public class RegisterFragment extends Fragment {
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            User user1 = new User(user.getUid(),edtName.getText().toString(),
+                            User user1 = new User(user.getUid(), edtName.getText().toString(),
                                     "default", "default", "default", edtEmail.getText().toString(),
                                     edtPass.getText().toString());
                             ref.child("user").child(user.getUid()).setValue(user1);
@@ -173,6 +183,9 @@ public class RegisterFragment extends Fragment {
                         }
                     }
                 });
+        long num = 1525454487874854L;
+        String data = LocalDateTime.ofInstant(Instant.ofEpochMilli(Long.valueOf(num)), ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("MM-yyyy"));
+
     }
 
     private boolean check(String name, String email, String pass) {

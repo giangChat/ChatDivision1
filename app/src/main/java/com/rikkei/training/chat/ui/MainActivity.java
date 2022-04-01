@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        getFragment(new FriendsFragment());
         init();
         sharedPreferences=getSharedPreferences("language",MODE_PRIVATE);
         editor=sharedPreferences.edit();
