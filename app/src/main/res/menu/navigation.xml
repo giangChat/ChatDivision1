@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_message"
-        android:icon="@drawable/message_blue"
+        android:icon="@drawable/ic_message_gray"
         android:title="@string/message" />
 
     <item
         android:id="@+id/navigation_friends"
-        android:icon="@drawable/friend"
+        android:icon="@drawable/ic_friend_gray"
         android:title="@string/friends" />
 
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/account"
+        android:icon="@drawable/ic_personal_page_gray"
         android:title="@string/profile" />
 </menu>

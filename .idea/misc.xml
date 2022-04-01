@@ -8,38 +8,55 @@
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/logout.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/drawable/version_application.xml" value="0.2703125" />
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/activity_main.xml" value="0.11676798378926039" />
-<<<<<<< HEAD
-=======
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/edit_profile_fragment.xml" value="0.264" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_all_friends.xml" value="0.1331521739130435" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_chat_friends.xml" value="0.20923913043478262" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_friends_friends.xml" value="0.14221014492753623" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_req_fragment.xml" value="0.264" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/fragment_req_friends.xml" value="0.12360688956433637" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/friends_fragment.xml" value="0.14221014492753623" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/item_friends_friends.xml" value="0.14221014492753623" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/item_sort_name.xml" value="0.12360688956433637" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/message_fragment.xml" value="0.264" />
-        <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/layout/profile_fragment.xml" value="0.264" />
->>>>>>> 58703dc (VTG Craete Chat Group)
         <entry key="..\:/DivisionD1/proAppChat/ChatDivision1/app/src/main/res/menu/navigation.xml" value="0.15185185185185185" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/backgroud.xml" value="0.3675" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/backgroud_bottom_navigation.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/backward_arrow1.xml" value="0.2605" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/bg_conner.xml" value="0.2115" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/bg_detail_message.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/bg_item_avatar.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/bg_photo_camera_profile.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/bg_profile.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/bg_rcv_message.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/btn_customer.xml" value="0.3035" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/btn_customer_full.xml" value="0.3035" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_arrow_left_white_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_arrow_right_gray_small_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_avatar_user_default_while_large_icon.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_baseline_key_24.xml" value="0.3675" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_birthday_cake_blue_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_camera.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_friend_gray.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_language_gray_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_logout_red_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_message_gray.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_notification_gray_icon.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_outline_email_24.xml" value="0.3675" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_pen_blue_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_personal_page_blue.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_personal_page_gray.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_phone_blue_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_photo_camera_white_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_photo_local_gray_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_reuse_gray_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_send_blue_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/ic_user_blue_icon.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/language.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/notification.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/persion.xml" value="0.2605" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/drawable/version_application.xml" value="0.3675" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/activity_login_register.xml" value="0.35260416666666666" />
-        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/activity_main.xml" value="0.24427083333333333" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/activity_slapsh.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/backgroud.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/edit_profile_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_all_friends.xml" value="0.3625" />
-        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_chat.xml" value="0.5" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_chat.xml" value="0.390625" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_chat_friends.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_detail_message.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_friends_friends.xml" value="0.3625" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_home_chat.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/fragment_login.xml" value="0.23020833333333332" />
@@ -51,7 +68,7 @@
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/login_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/profile_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/register_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/layout/register_fragment.xml" value="0.1" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/menu/navigation.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/menu/navigation_friends.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GiangVN/Documents/GitHub/ChatDivision1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3675" />
