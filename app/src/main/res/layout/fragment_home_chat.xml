@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroud">
-
+    >
+    <View
+        android:id="@+id/view_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/backgroud"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
@@ -23,10 +32,13 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginRight="12dp"
-        android:src="@drawable/create_new_message"
+        android:background="@drawable/bg_image_add_message"
+        android:src="@drawable/ic_add_message_blue_icon"
+        android:scaleType="center"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvMessage" />
-
+        app:layout_constraintTop_toTopOf="@id/tvMessage"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMessage"
+        />
     <EditText
         android:id="@+id/edSearch"
         android:layout_width="match_parent"
@@ -39,11 +51,16 @@
         android:focusable="true"
         android:hint="@string/hintSearchMessage"
         android:paddingLeft="15dp"
-        android:textColor="#999999"
+        android:textColor="@color/gray_detail_message"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tvMessage" />
+        app:layout_constraintTop_toBottomOf="@id/tvMessage"
+        app:layout_constraintBottom_toTopOf="@+id/flRcvChat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <FrameLayout
+        android:id="@+id/flRcvChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="22dp"

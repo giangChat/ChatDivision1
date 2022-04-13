@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgAvatarReceived"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/bg_item_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/textMessageReceived"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textMessageReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/background_received_message_single"
+        android:padding="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/imgAvatarReceived"
+        app:layout_constraintTop_toTopOf="parent"/>
+<!--        app:layout_constraintWidth_percent="0.75"-->
+
+    <TextView
+        android:id="@+id/tvDateTimeReceived"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/lato"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/textMessageReceived"
+        app:layout_constraintTop_toBottomOf="@id/textMessageReceived"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

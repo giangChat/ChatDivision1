@@ -50,7 +50,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:drawableEnd="@drawable/persion"
+        android:drawableEnd="@drawable/ic_user_blue_icon"
         android:hint="Nguyem Văn A"
         android:lines="1"
         android:maxLength="50"

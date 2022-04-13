@@ -3,10 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg">
+    >
 
 
-
+    <View
+        android:id="@+id/view_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/backgroud"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/tvFriends"
         android:layout_width="wrap_content"
@@ -24,26 +33,23 @@
         android:id="@+id/imgMessage"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="30dp"
         android:layout_marginRight="12dp"
-        android:src="@drawable/circle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="16dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginRight="22dp"
+        android:background="@drawable/bg_image_add_message"
         android:src="@drawable/friends_blue"
+        android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/tvFriends"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFriends"/>
+
+
 
     <EditText
         android:id="@+id/edSearch"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:background="@drawable/border_search"
         android:drawableStart="@drawable/search"
         android:focusable="true"
@@ -56,7 +62,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="22dp"
         android:background="@drawable/bg_conner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

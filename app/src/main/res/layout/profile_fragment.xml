@@ -33,7 +33,6 @@
         android:layout_height="65dp"
         android:layout_marginHorizontal="12dp"
         android:background="@drawable/bg_item_avatar"
-        android:scaleType="center"
         android:src="@drawable/ic_avatar_user_default_while_large_icon"
         app:layout_constraintBottom_toBottomOf="@id/viewProfile"
         app:layout_constraintLeft_toLeftOf="@id/viewProfile"
@@ -257,7 +256,7 @@
         app:layout_constraintLeft_toRightOf="@id/imgLogout"
         app:layout_constraintTop_toTopOf="@id/viewLogout" />
     <View
-        android:id="@+id/view_line_logout"
+        android:id="@+id/viewLineLogout"
         android:layout_width="0dp"
         android:layout_height="5dp"
         android:background="@color/gray"

@@ -66,6 +66,7 @@ public class RegisterFragment extends Fragment {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         btDK.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 onClickSignUp();
@@ -183,8 +184,6 @@ public class RegisterFragment extends Fragment {
                         }
                     }
                 });
-        long num = 1525454487874854L;
-        String data = LocalDateTime.ofInstant(Instant.ofEpochMilli(Long.valueOf(num)), ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("MM-yyyy"));
 
     }
 
@@ -201,5 +200,4 @@ public class RegisterFragment extends Fragment {
         edtName = view.findViewById(R.id.edtName);
         checkBox_DK = view.findViewById(R.id.chbPolicy);
     }
-
 }

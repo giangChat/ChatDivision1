@@ -8,12 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,20 +34,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.rikkei.training.chat.R;
 
-import java.io.File;
-import java.io.IOException;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileFragment extends Fragment {
 
-    private View view;
     MainActivity mainActivity;
     ImageView butBackProfile;
     TextView tvSaveInfo;
@@ -83,8 +73,13 @@ public class EditProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.edit_profile_fragment, container, false);
-        init();
+        return inflater.inflate(R.layout.edit_profile_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(view);
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
@@ -95,7 +90,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.getValue().toString().equals("default")) {
-                   Glide.with(mainActivity).load(snapshot.getValue()).into(imgUpdateUser);
+                    Glide.with(mainActivity).load(snapshot.getValue()).into(imgUpdateUser);
                 }
             }
 
@@ -145,13 +140,14 @@ public class EditProfileFragment extends Fragment {
         butBackProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.getFragment(new ProfileFragment());
+                mainActivity.setFragment(new ProfileFragment(), true);
                 mainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
             }
         });
         imgCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog alertDialog = new AlertDialog.Builder(mainActivity).create();
                 alertDialog.setTitle("Allow access to camera or photo gallery");
                 alertDialog.setIcon(R.drawable.camera);
@@ -175,13 +171,19 @@ public class EditProfileFragment extends Fragment {
         tvSaveInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateAvt(imgUri);
-                databaseReference.child("fullName").setValue(edName.getText().toString().trim());
-                databaseReference.child("birthDay").setValue(edBirthday.getText().toString().trim());
-                databaseReference.child("numberPhone").setValue(edNumber.getText().toString().trim());
+                if (imgUri != null) {
+                    updateAvt(imgUri);
+                    databaseReference.child("fullName").setValue(edName.getText().toString().trim());
+                    databaseReference.child("birthDay").setValue(edBirthday.getText().toString().trim());
+                    databaseReference.child("numberPhone").setValue(edNumber.getText().toString().trim());
+                } else {
+                    databaseReference.child("fullName").setValue(edName.getText().toString().trim());
+                    databaseReference.child("birthDay").setValue(edBirthday.getText().toString().trim());
+                    databaseReference.child("numberPhone").setValue(edNumber.getText().toString().trim());
+                }
             }
         });
-        return view;
+
     }
 
     @Override
@@ -191,7 +193,7 @@ public class EditProfileFragment extends Fragment {
             Bundle bundle = data.getExtras();
             Bitmap bitmap = (Bitmap) bundle.get("data");
             imgUpdateUser.setImageBitmap(bitmap);
-            imgUri=data.getData();
+            imgUri = data.getData();
         }
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imgUri = data.getData();
@@ -304,14 +306,14 @@ public class EditProfileFragment extends Fragment {
 
     }
 
-    public void init() {
+    public void init(View view) {
         mainActivity = (MainActivity) getActivity();
-        butBackProfile = view.findViewById(R.id.butBackProfile);
+        butBackProfile = view.findViewById(R.id.imgBack);
         tvSaveInfo = view.findViewById(R.id.tvSaveInfoUser);
         imgUpdateUser = view.findViewById(R.id.imgUpdateUser);
         imgCamera = view.findViewById(R.id.imgCamera);
-        edName = view.findViewById(R.id.edName);
-        edNumber = view.findViewById(R.id.edNumber);
+        edName = view.findViewById(R.id.edFullName);
+        edNumber = view.findViewById(R.id.edPhoneNumber);
         edBirthday = view.findViewById(R.id.edBirthday);
     }
 }

@@ -1,12 +1,10 @@
 package com.rikkei.training.chat.ui;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -32,11 +30,10 @@ import com.rikkei.training.chat.R;
 
 import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileFragment extends Fragment {
-    private View view;
-    CircleImageView imgUser;
+
+    ImageView imgAvatarUser;
+    TextView tvUserName;
     TextView tvEmailUser;
     ImageView imgEditProfile,imgUser1;
     TextView tvLanguage;
@@ -45,6 +42,7 @@ public class ProfileFragment extends Fragment {
     TextView tvLanguageTitle;
     TextView tvNotification;
     TextView tvVersionApp;
+    View viewLogOut;
     private MainActivity mainActivity;
     private static final String ENGLISH_CODE = "en";
     private static final String VN_CODE = "vi";
@@ -54,9 +52,7 @@ public class ProfileFragment extends Fragment {
     DatabaseReference databaseReference;
 
     public static Fragment newInstance() {
-
         Bundle args = new Bundle();
-
         ProfileFragment fragment = new ProfileFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,8 +61,13 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.profile_fragment, container, false);
-        init();
+        return inflater.inflate(R.layout.profile_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(view);
         user= FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference().child("user").child(user.getUid());
@@ -74,7 +75,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.getValue().toString().equals("default")){
-                    Glide.with(mainActivity).load(snapshot.getValue()).into(imgUser);
+                    Glide.with(mainActivity).load(snapshot.getValue()).into(imgAvatarUser);
                     Glide.with(mainActivity).load(snapshot.getValue()).into(imgUser1);
                 }
             }
@@ -96,12 +97,23 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+        databaseReference.child("fullName").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tvUserName.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         mainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
         imgEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.getFragment(new EditProfileFragment());
+                mainActivity.setFragment(new EditProfileFragment(), true);
                 mainActivity.getBottomNavigationView().setVisibility(View.GONE);
             }
         });
@@ -126,12 +138,21 @@ public class ProfileFragment extends Fragment {
                 alertDialog.show();
             }
         });
-        return view;
+        viewLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(mainActivity, LoginRegisterActivity.class);
+                startActivity(intent);
+                mainActivity.finish();
+            }
+        });
     }
 
-    public void init() {
+    public void init(View view) {
         mainActivity = (MainActivity) getActivity();
-        imgUser = view.findViewById(R.id.imgUser);
+        tvUserName = view.findViewById(R.id.tvUserName);
+        imgAvatarUser = view.findViewById(R.id.imgAvatarUser);
         imgEditProfile = view.findViewById(R.id.imgGoToEditProfile);
         tvEmailUser = view.findViewById(R.id.tvEmailUser);
         tvLanguage = view.findViewById(R.id.tvLanguage);
@@ -141,6 +162,7 @@ public class ProfileFragment extends Fragment {
         tvLanguageTitle = view.findViewById(R.id.tvLanguageTitle);
         tvVersionApp = view.findViewById(R.id.tvVersionApp);
         imgUser1=view.findViewById(R.id.imgUser1);
+        viewLogOut = view.findViewById(R.id.viewLogout);
     }
 
     public void changeLanguage(String language) {
@@ -164,6 +186,6 @@ public class ProfileFragment extends Fragment {
         Intent intent = mainActivity.getIntent();
         mainActivity.finish();
         startActivity(intent);
-        mainActivity.getFragment(new ProfileFragment());
+        mainActivity.setFragment(new ProfileFragment(), true);
     }
 }

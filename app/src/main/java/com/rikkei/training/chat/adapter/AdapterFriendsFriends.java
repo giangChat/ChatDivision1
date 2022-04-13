@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rikkei.training.chat.R;
+import com.rikkei.training.chat.a.IClickItemFriendListener;
 import com.rikkei.training.chat.modle.User;
 
 import java.util.List;
@@ -21,10 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterFriendsFriends extends RecyclerView.Adapter<AdapterFriendsFriends.ViewHolder> {
     List<User> userList;
     Context context;
+    private IClickItemFriendListener iClickItemFriendListener;
 
-    public AdapterFriendsFriends(List<User> userList, Context context) {
+    public AdapterFriendsFriends(List<User> userList, Context context, IClickItemFriendListener iClickItemFriendListener) {
         this.userList = userList;
         this.context = context;
+        this.iClickItemFriendListener = iClickItemFriendListener;
     }
 
     @NonNull
@@ -58,6 +62,12 @@ public class AdapterFriendsFriends extends RecyclerView.Adapter<AdapterFriendsFr
                 holder.tvNameFirst.setText(name);
             }
         }
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickItemFriendListener.onClickItemFriend(user);
+            }
+        });
     }
 
     @Override
@@ -69,6 +79,7 @@ public class AdapterFriendsFriends extends RecyclerView.Adapter<AdapterFriendsFr
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout linearLayout;
         CircleImageView imgUser;
         TextView tvUserName;
         AppCompatButton butConfirm;
@@ -76,6 +87,7 @@ public class AdapterFriendsFriends extends RecyclerView.Adapter<AdapterFriendsFr
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            linearLayout = itemView.findViewById(R.id.itemSortName);
             imgUser = itemView.findViewById(R.id.imgUser);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             butConfirm = itemView.findViewById(R.id.butConfirmFriends);

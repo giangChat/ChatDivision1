@@ -109,6 +109,13 @@ public class FriendsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+//        mainActivity.changeVisibleBottomSheet(true);
+        ((MainActivity) requireActivity()).changeVisibleBottomSheet(true);
+    }
+
     public void getData() {
         userList = new ArrayList<>();
         databaseReference.child("user").addValueEventListener(new ValueEventListener() {

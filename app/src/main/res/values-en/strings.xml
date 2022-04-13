@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Chat</string>
     <string name="Awesome">Awesome chat experience</string>
     <string name="login">Log in</string>
     <string name="LogIn">Log In</string>
@@ -35,9 +34,10 @@
     <string name="agreePolicy_Condition">Tôi đồng ý với các chính sánh và điều kiện</string>
     <string name="agree">Agree</string>
     <string name="inviteFriend">Invite</string>
-    <string name="INVITEFRIEND">Invite friends</string>
-    <string name="INVITEDFRIEND">Invited friends</string>
+    <string name="INVITEFRIEND">Add friends</string>
+    <string name="INVITEDFRIEND">Confirm friends</string>
     <string name="VietNamese">VietNamese</string>
     <string name="save">Save</string>
     <string name="English">English</string>
+    <string name="TypeAMessage">Type a message...</string>
 </resources>
