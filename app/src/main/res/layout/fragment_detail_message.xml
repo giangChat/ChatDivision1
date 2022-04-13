@@ -38,20 +38,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/imgAvatar"
         app:layout_constraintTop_toTopOf="@id/imgAvatar" />
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_detail_message"
-        android:paddingLeft="13dp"
-        android:paddingRight="13dp"
-        android:paddingBottom="6dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/viewDetailMessage"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewDetailMessage" />
+
     <View
         android:id="@+id/viewDetailMessage"
         android:layout_width="0dp"
@@ -62,7 +49,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgBack"/>
+        app:layout_constraintTop_toBottomOf="@id/imgBack" />
 
     <ImageView
         android:id="@+id/img_photo_local"
@@ -93,12 +80,12 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/img_photo_local"
-        app:layout_constraintRight_toLeftOf="@+id/img_send"
+        app:layout_constraintRight_toLeftOf="@+id/imgSend"
         app:layout_constraintTop_toBottomOf="@id/rcvDetailMessage" />
 
 
     <ImageView
-        android:id="@+id/img_send"
+        android:id="@+id/imgSend"
         android:layout_width="46dp"
         android:layout_height="52dp"
         android:scaleType="center"
@@ -120,4 +107,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/viewDetailMessage" />
 
+    <TextView
+        android:id="@+id/tvTimeSendMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_detail_message"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:paddingBottom="6dp"
+        android:text="Hôm Nay"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/viewDetailMessage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewDetailMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,6 @@
 package com.rikkei.training.chat.ui;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rikkei.training.chat.R;
+import com.rikkei.training.chat.a.IClickItemFriendListener;
 import com.rikkei.training.chat.adapter.AdapterFriendsFriends;
 import com.rikkei.training.chat.modle.StatusFriends;
 import com.rikkei.training.chat.modle.User;
@@ -37,6 +35,7 @@ public class FriendFriendsFragment extends Fragment {
     RecyclerView rcvDataFriends;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    MainActivity mainActivity;
     FirebaseUser user;
 
     public static Fragment newInstance() {
@@ -53,14 +52,15 @@ public class FriendFriendsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_friends_friends, container, false);
         init();
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
-        user= FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         getData();
         return view;
     }
 
     public void init() {
+        mainActivity = (MainActivity) getActivity();
         rcvDataFriends = view.findViewById(R.id.rcvDataFriendsFriends);
     }
 
@@ -70,10 +70,10 @@ public class FriendFriendsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
-                Iterable<DataSnapshot> dataSnapshotIterable=snapshot.getChildren();
-                for(DataSnapshot data:dataSnapshotIterable){
+                Iterable<DataSnapshot> dataSnapshotIterable = snapshot.getChildren();
+                for (DataSnapshot data : dataSnapshotIterable) {
                     User user1 = data.getValue(User.class);
-                        userList.add(user1);
+                    userList.add(user1);
                 }
             }
 
@@ -82,18 +82,27 @@ public class FriendFriendsFragment extends Fragment {
 
             }
         });
-        statusFriendsList=new ArrayList<>();
-        DatabaseReference databaseReference1=firebaseDatabase.getReference();
+        statusFriendsList = new ArrayList<>();
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference();
         databaseReference1.child("friend").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                statusFriendsList.clear();
-                Iterable<DataSnapshot> dataSnapshotIterable=snapshot.getChildren();
-                for(DataSnapshot data:dataSnapshotIterable){
-                    StatusFriends statusFriends=data.getValue(StatusFriends.class);
+
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    StatusFriends statusFriends = data.getValue(StatusFriends.class);
                     statusFriendsList.add(statusFriends);
                 }
-                AdapterFriendsFriends adapterFriendsFriends = new AdapterFriendsFriends(getUserFriends(userList,statusFriendsList), getContext());
+                AdapterFriendsFriends adapterFriendsFriends = new AdapterFriendsFriends(getUserFriends(userList, statusFriendsList), getContext(), new IClickItemFriendListener() {
+                    @Override
+                    public void onClickItemFriend(User user) {
+                        FragmentDetailMessage fragmentDetailMessage = new FragmentDetailMessage();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id",user.getId());
+                        fragmentDetailMessage.setArguments(bundle);
+                        mainActivity.setFragment(fragmentDetailMessage, true);
+                        mainActivity.changeVisibleBottomSheet(false);
+                    }
+                });
                 rcvDataFriends.setAdapter(adapterFriendsFriends);
             }
 
@@ -102,6 +111,13 @@ public class FriendFriendsFragment extends Fragment {
 
             }
         });
+    }
+
+    private void setFragment(Fragment fragment) {
+        requireActivity()
+                .getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment, fragment).addToBackStack(fragment.toString())
+                .commit();
     }
 
     public List<User> sortUser(List<User> userList) {
@@ -124,7 +140,7 @@ public class FriendFriendsFragment extends Fragment {
         return tg[tg.length - 1];
     }
 
-    public List<User> getUserFriends(List<User> users,List<StatusFriends> statusFriends) {
+    public List<User> getUserFriends(List<User> users, List<StatusFriends> statusFriends) {
         List<User> userFriends = new ArrayList<>();
         List<StatusFriends> statusFriendsFriended = new ArrayList<>();
         for (StatusFriends s : statusFriends) {

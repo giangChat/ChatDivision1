@@ -24,7 +24,7 @@
         android:layout_marginBottom="36dp"
         android:scaleType="center"
         android:src="@drawable/ic_arrow_left_white_icon"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/viewInformation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,10 +33,10 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginHorizontal="12dp"
+        android:gravity="center"
         android:text="@string/save"
         android:textColor="@color/white"
         android:textSize="19sp"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/imgBack"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/imgBack" />
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toTopOf="@id/imgBack" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/viewInformation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/bg_conner"
@@ -74,10 +74,10 @@
         android:background="@drawable/bg_item_avatar"
         android:scaleType="centerCrop"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf=""
-        app:layout_constraintLeft_toLeftOf="@id/view"
-        app:layout_constraintRight_toRightOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view" />
+        app:layout_constraintBottom_toTopOf="@id/tvFullName"
+        app:layout_constraintLeft_toLeftOf="@id/viewInformation"
+        app:layout_constraintRight_toRightOf="@id/viewInformation"
+        app:layout_constraintTop_toTopOf="@id/viewInformation" />
 
     <ImageView
         android:id="@+id/imgCamera"
@@ -99,7 +99,7 @@
         android:textAllCaps="true"
         android:textColor="#999999"
         android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@id/view"
+        app:layout_constraintLeft_toLeftOf="@id/viewInformation"
         app:layout_constraintTop_toBottomOf="@+id/imgUpdateUser" />
 
 
@@ -114,8 +114,8 @@
         android:textFontWeight="500"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/tvPhoneNumber"
-        app:layout_constraintLeft_toLeftOf="@id/view"
-        app:layout_constraintRight_toRightOf="@id/view"
+        app:layout_constraintLeft_toLeftOf="@id/viewInformation"
+        app:layout_constraintRight_toRightOf="@id/viewInformation"
         app:layout_constraintTop_toBottomOf="@id/tvFullName" />
 
     <TextView
@@ -128,7 +128,7 @@
         android:textColor="#999999"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/edFullName"
-        app:layout_constraintLeft_toLeftOf="@id/view"
+        app:layout_constraintLeft_toLeftOf="@id/viewInformation"
         app:layout_constraintTop_toBottomOf="@+id/edFullName" />
 
     <EditText
@@ -154,7 +154,7 @@
         android:textColor="#999999"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/edBirthday"
-        app:layout_constraintLeft_toLeftOf="@id/view"
+        app:layout_constraintLeft_toLeftOf="@id/viewInformation"
         app:layout_constraintTop_toBottomOf="@+id/edPhoneNumber" />
 
     <EditText

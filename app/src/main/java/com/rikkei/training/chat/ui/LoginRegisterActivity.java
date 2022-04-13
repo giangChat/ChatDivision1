@@ -24,9 +24,10 @@ public class LoginRegisterActivity extends AppCompatActivity {
     public void goToFragment(Fragment fragment) {
         setFragment(fragment);
     }
+
     public void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        this.finish();
     }
-
 }
