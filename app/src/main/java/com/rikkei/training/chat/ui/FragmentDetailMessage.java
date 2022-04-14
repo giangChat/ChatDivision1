@@ -136,12 +136,12 @@ public class FragmentDetailMessage extends Fragment {
             @Override
             public void onClick(View v) {
                 mainActivity.getSupportFragmentManager().popBackStack();
+                mainActivity.changeVisibleBottomSheet(true);
 
             }
         });
 
     }
-
     private void createMessage() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         String message = edMessage.getText().toString().trim();

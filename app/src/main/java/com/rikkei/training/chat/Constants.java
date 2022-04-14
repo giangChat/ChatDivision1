@@ -2,9 +2,11 @@ package com.rikkei.training.chat;
 
 public class Constants {
 
+    public static final String KEY_ID = "id";
     public static final String KEY_USER = "user";
     public static final String KEY_FULL_NAME = "fullName";
     public static final String KEY_FRIEND = "friend";
+    public static final String KEY_STATUS = "status";
     public static final String KEY_ID_CHAT = "idChat";
     public static final String KEY_CHATS = "chats";
     public static final String KEY_MESSAGES = "messages";

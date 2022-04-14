@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     setFragment(FriendsFragment.newInstance(), false);
                     return true;
                 case R.id.navigation_message:
-                    setFragment(new HomeChatFragment(), false);
+                    setFragment(new FragmentMessage(), false);
                     return true;
                 case R.id.navigation_account:
                     setFragment(new ProfileFragment(), false);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
         });
-        setFragment(new HomeChatFragment(), false);
+        setFragment(new FragmentMessage(), false);
     }
 
     public void changeVisibleBottomSheet(boolean isVisible) {

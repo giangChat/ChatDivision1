@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.a.IClickItemFriendListener;
 import com.rikkei.training.chat.adapter.AdapterFriendsFriends;
+import com.rikkei.training.chat.modle.Conversation;
 import com.rikkei.training.chat.modle.StatusFriends;
 import com.rikkei.training.chat.modle.User;
 
@@ -101,6 +102,10 @@ public class FriendFriendsFragment extends Fragment {
                         fragmentDetailMessage.setArguments(bundle);
                         mainActivity.setFragment(fragmentDetailMessage, true);
                         mainActivity.changeVisibleBottomSheet(false);
+                    }
+                    @Override
+                    public void onClickItemFriend(Conversation conversation) {
+
                     }
                 });
                 rcvDataFriends.setAdapter(adapterFriendsFriends);
