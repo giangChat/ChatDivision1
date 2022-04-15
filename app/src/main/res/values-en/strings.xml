@@ -40,4 +40,8 @@
     <string name="save">Save</string>
     <string name="English">English</string>
     <string name="TypeAMessage">Type a message...</string>
+    <string name="no_account">No Account?</string>
+    <string name="sing_up_now">Sign up now</string>
+    <string name="have_a_account">Have a account?</string>
+    <string name="sign_in_now">Sign in now</string>
 </resources>

@@ -28,6 +28,7 @@
         android:text="Vi Nhật Giang"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/lato"
         app:layout_constraintLeft_toRightOf="@id/imageUserMessage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,8 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="08:00"
-        android:textColor="@color/black"
+        android:textColor="@color/gray"
         android:textSize="12sp"
+        android:fontFamily="@font/lato"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +53,7 @@
         android:text="Xin Chào"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:fontFamily="@font/lato"
         app:layout_constraintLeft_toRightOf="@id/imageUserMessage"
         app:layout_constraintTop_toBottomOf="@id/tvNameUserMessage" />
 
@@ -65,12 +68,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_badge_message"
+        android:id="@+id/tvBadgeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5"
+        android:fontFamily="@font/lato"
         android:textColor="@color/white"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/imgBadgeBessage"
         app:layout_constraintLeft_toLeftOf="@id/imgBadgeBessage"
         app:layout_constraintRight_toRightOf="@id/imgBadgeBessage"

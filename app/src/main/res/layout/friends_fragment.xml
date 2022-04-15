@@ -7,7 +7,7 @@
 
 
     <View
-        android:id="@+id/view_background"
+        android:id="@+id/viewBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/backgroud"
@@ -23,9 +23,9 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="30dp"
         android:text="@string/friends"
+        android:fontFamily="@font/lato_bold"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +53,9 @@
         android:background="@drawable/border_search"
         android:drawableStart="@drawable/search"
         android:focusable="true"
+        android:drawablePadding="15dp"
         android:hint="@string/hintSearchMessage"
+        android:fontFamily="@font/lato"
         android:paddingLeft="15dp"
         android:textColor="#999999"
         android:textSize="16sp"
@@ -122,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/noFindKQ"
+                android:fontFamily="@font/lato"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />

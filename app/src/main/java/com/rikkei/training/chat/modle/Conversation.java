@@ -3,6 +3,7 @@ package com.rikkei.training.chat.modle;
 public class Conversation {
     String id ;
     String fullName;
+    String idRoomChat;
     String imgPhoto;
     String lastMessage;
     int coutUnSeen;
@@ -11,15 +12,23 @@ public class Conversation {
     public Conversation() {
     }
 
-    public Conversation(String id, String fullName, String imgPhoto, String lastMessage, int coutUnSeen, long lastTime) {
+    public Conversation(String id, String fullName,String idRoomChat, String imgPhoto, String lastMessage, int coutUnSeen, long lastTime) {
         this.id = id;
         this.fullName = fullName;
+        this.idRoomChat = idRoomChat;
         this.imgPhoto = imgPhoto;
         this.lastMessage = lastMessage;
         this.coutUnSeen = coutUnSeen;
         this.lastTime = lastTime;
     }
 
+    public String getIdRoomChat() {
+        return idRoomChat;
+    }
+
+    public void setIdRoomChat(String idRoomChat) {
+        this.idRoomChat = idRoomChat;
+    }
     public String getId() {
         return id;
     }

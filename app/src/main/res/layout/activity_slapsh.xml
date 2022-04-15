@@ -15,32 +15,35 @@
         app:layout_constraintGuide_percent="0.5"/>
 
     <TextView
-        android:id="@+id/tv_appname_sub1"
+        android:id="@+id/tvAppnameSub1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/appName1"
+        android:fontFamily="@font/exo_bold"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@id/guideline"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/tv_appname_sub2" />
+        app:layout_constraintRight_toLeftOf="@id/tvAppnameSub2" />
 
     <TextView
-        android:id="@+id/tv_appname_sub2"
+        android:id="@+id/tvAppnameSub2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/appName2"
+        android:fontFamily="@font/exo_light"
         android:textColor="@color/white"
         android:textSize="40sp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline"
-        app:layout_constraintLeft_toRightOf="@id/tv_appname_sub1"
+        app:layout_constraintLeft_toRightOf="@id/tvAppnameSub1"
         app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/tv_appname_sub1"
+        app:layout_constraintBottom_toTopOf="@id/tvAppnameSub1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_paper_plane_white_icon"/>

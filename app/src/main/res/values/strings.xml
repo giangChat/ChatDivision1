@@ -41,4 +41,8 @@
     <string name="save">Lưu</string>
     <string name="English">English</string>
     <string name="TypeAMessage">Nhập tin nhắn...</string>
+    <string name="no_account">Chưa có tài khoản?</string>
+    <string name="sing_up_now">Đăng ký ngay</string>
+    <string name="have_a_account">Đã có tài khoản?</string>
+    <string name="sign_in_now">Đăng nhập ngay</string>
 </resources>

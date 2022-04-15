@@ -49,6 +49,11 @@ public class AdapterDetailMessage extends RecyclerView.Adapter<RecyclerView.View
             MessageReceiveViewHolder messageReceiveViewHolder = new MessageReceiveViewHolder(view);
             return messageReceiveViewHolder;
         }
+        if (viewType == 3) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contrainer_sent_message_img, parent, false);
+            MessageSendImgViewHolder sendImgViewHolder = new MessageSendImgViewHolder(view);
+            return sendImgViewHolder;
+        }
         return null;
     }
 
@@ -57,7 +62,6 @@ public class AdapterDetailMessage extends RecyclerView.Adapter<RecyclerView.View
         Messages message = messagesList.get(position);
 
         if (holder.getItemViewType() == MSG_TYPE_SENT) {
-
             MessageSendViewHolder mSentVH = (MessageSendViewHolder) holder;
             if (message.getStatus() == Constants.SINGLE) {
                 mSentVH.tvMessageSent.setBackgroundResource(R.drawable.background_sent_message_single);
@@ -88,10 +92,16 @@ public class AdapterDetailMessage extends RecyclerView.Adapter<RecyclerView.View
             } else if (message.getStatus() == Constants.END) {
                 mReceiveVH.tvMessageReceived.setBackgroundResource(R.drawable.background_received_message_end);
             }
-            if(!imgUrl.equals("default")) {
+            if (!imgUrl.equals("default")) {
                 Glide.with(context).load(imgUrl).into(mReceiveVH.imgAvatar);
             }
+            mReceiveVH.tvDateTimeReceived.setText(Messages.convertSecondsToHMm(message.getTimeLong()));
             mReceiveVH.tvMessageReceived.setText(message.getMessage());
+        } else if (holder.getItemViewType() == 3){
+            MessageSendImgViewHolder sendImgViewHolder = (MessageSendImgViewHolder) holder;
+            Glide.with(context).load(message.getMessage().trim()).into(sendImgViewHolder.tvMessageSentImg);
+
+
         }
     }
 
@@ -104,10 +114,16 @@ public class AdapterDetailMessage extends RecyclerView.Adapter<RecyclerView.View
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (messagesList.get(position).getIdSender().equals(firebaseUser.getUid())) {
-            return MSG_TYPE_SENT;
+            if (messagesList.get(position).getType().equals("img")) {
+                return 3;
+            } else {
+                return MSG_TYPE_SENT;
+            }
+
         } else {
             return MSG_TYPE_RECEIVED;
         }
+
     }
 }
 
@@ -132,5 +148,16 @@ class MessageSendViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         tvMessageSent = itemView.findViewById(R.id.textMessageSent);
         tvDateTimeSent = itemView.findViewById(R.id.tvDateTimeSent);
+    }
+}
+
+class MessageSendImgViewHolder extends RecyclerView.ViewHolder {
+    ImageView tvMessageSentImg;
+    TextView tvDateTimeSent;
+
+    public MessageSendImgViewHolder(@NonNull View itemView) {
+        super(itemView);
+        tvMessageSentImg = itemView.findViewById(R.id.imgMessageSentImg);
+        tvDateTimeSent = itemView.findViewById(R.id.tvDateTimeSentImg);
     }
 }

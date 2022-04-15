@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/imgBack" />
 
     <ImageView
-        android:id="@+id/img_photo_local"
+        android:id="@+id/imgPhotoLocal"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:background="@drawable/bg_detail_message"
@@ -78,7 +78,7 @@
         android:textFontWeight="500"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/img_photo_local"
+        app:layout_constraintLeft_toRightOf="@id/imgPhotoLocal"
         app:layout_constraintRight_toLeftOf="@+id/imgSend"
         app:layout_constraintTop_toBottomOf="@id/rcvDetailMessage" />
 
@@ -121,4 +121,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/viewDetailMessage" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvlistPhotoLocal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        android:background="@drawable/bg_item_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/edMessage"
+        app:layout_constraintHeight_percent="0.3"
+        android:translationZ="1dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

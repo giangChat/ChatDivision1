@@ -37,11 +37,11 @@ import java.util.List;
 
 public class FragmentDetailMessage extends Fragment {
 
-    RecyclerView rcvMessage;
+    RecyclerView rcvMessage,rcvPhotoLocal;
     TextView tvTimeSendMessage;
     TextView tvUserName;
     EditText edMessage;
-    ImageView imgSend, imgAvatar, imgBack;
+    ImageView imgSend, imgAvatar, imgBack, imgPhotoLocal;
     FirebaseDatabase db;
     FirebaseUser user;
     DatabaseReference ref;
@@ -70,9 +70,11 @@ public class FragmentDetailMessage extends Fragment {
         if (bundle != null) {
             idReceived = bundle.getString("id");
         }
+
         messagesList = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseDatabase.getInstance();
+        getMessage();
         ref = db.getReference().child(Constants.KEY_USER).child(idReceived);
         ref.child(Constants.KEY_IMG).addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,8 +102,6 @@ public class FragmentDetailMessage extends Fragment {
                 Toast.makeText(mainActivity, "Error Loading...", Toast.LENGTH_SHORT).show();
             }
         });
-        getMessage();
-
         edMessage.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -138,6 +138,12 @@ public class FragmentDetailMessage extends Fragment {
                 mainActivity.getSupportFragmentManager().popBackStack();
                 mainActivity.changeVisibleBottomSheet(true);
 
+            }
+        });
+        imgPhotoLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rcvPhotoLocal.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -236,6 +242,7 @@ public class FragmentDetailMessage extends Fragment {
     public void init(View view) {
 
         mainActivity = (MainActivity) getActivity();
+        imgPhotoLocal = view.findViewById(R.id.imgPhotoLocal);
         imgBack = view.findViewById(R.id.imgBack);
         rcvMessage = view.findViewById(R.id.rcvDetailMessage);
         tvUserName = view.findViewById(R.id.tvUserName);
@@ -243,5 +250,6 @@ public class FragmentDetailMessage extends Fragment {
         imgSend = view.findViewById(R.id.imgSend);
         imgAvatar = view.findViewById(R.id.imgAvatar);
         tvTimeSendMessage = view.findViewById(R.id.tvTimeSendMessage);
+        rcvPhotoLocal = view.findViewById(R.id.rcvlistPhotoLocal);
     }
 }

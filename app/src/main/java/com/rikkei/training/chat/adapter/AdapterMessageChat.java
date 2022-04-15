@@ -1,6 +1,7 @@
 package com.rikkei.training.chat.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class AdapterMessageChat extends RecyclerView.Adapter<AdapterMessageChat.
     Context context;
     private IClickItemFriendListener iClickItemFriendListener;
 
-    public AdapterMessageChat(List<Conversation> userList, Context context,IClickItemFriendListener iClickItemFriendListener) {
+    public AdapterMessageChat(List<Conversation> userList, Context context, IClickItemFriendListener iClickItemFriendListener) {
         this.conversationList = userList;
         this.context = context;
         this.iClickItemFriendListener = iClickItemFriendListener;
@@ -42,13 +43,32 @@ public class AdapterMessageChat extends RecyclerView.Adapter<AdapterMessageChat.
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Conversation conversation = conversationList.get(position);
-        if(!conversation.getImgPhoto().equals("default")) {
+        if (!conversation.getImgPhoto().equals("default")) {
             Glide.with(context).load(conversation.getImgPhoto()).into(holder.imageUserMessage);
         }
 
         holder.tvlastTime.setText(Messages.convertSecondsToHMm(conversation.getLastTime()));
         holder.tvNameUserMessage.setText(conversation.getFullName());
-        holder.tvLastMessage.setText(conversation.getLastMessage());
+        if (conversation.getLastMessage().length() > 20 ) {
+            String text = conversation.getLastMessage().substring(0, 20) + "...";
+            holder.tvLastMessage.setText(text);
+        } else {
+            holder.tvLastMessage.setText(conversation.getLastMessage());
+        }
+        if (conversation.getCoutUnSeen() >= 1 && conversation.getCoutUnSeen() <= 9) {
+            holder.tvBadgeMessage.setText(String.valueOf(conversation.getCoutUnSeen()));
+            holder.tvBadgeMessage.setVisibility(View.VISIBLE);
+            holder.imgBadgeBessage.setVisibility(View.VISIBLE);
+        } else if (conversation.getCoutUnSeen() > 9) {
+            holder.tvBadgeMessage.setText("9+");
+            holder.tvBadgeMessage.setVisibility(View.VISIBLE);
+            holder.imgBadgeBessage.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvBadgeMessage.setText("");
+            holder.tvBadgeMessage.setVisibility(View.INVISIBLE);
+            holder.imgBadgeBessage.setVisibility(View.INVISIBLE);
+        }
+
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,16 +89,20 @@ public class AdapterMessageChat extends RecyclerView.Adapter<AdapterMessageChat.
     class MessageViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout constraintLayout;
         ImageView imageUserMessage;
+        TextView tvBadgeMessage;
         TextView tvNameUserMessage;
         TextView tvLastMessage;
         TextView tvlastTime;
+        ImageView imgBadgeBessage;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvBadgeMessage = itemView.findViewById(R.id.tvBadgeMessage);
             constraintLayout = itemView.findViewById(R.id.itemMessage);
             imageUserMessage = itemView.findViewById(R.id.imageUserMessage);
             tvNameUserMessage = itemView.findViewById(R.id.tvNameUserMessage);
             tvlastTime = itemView.findViewById(R.id.tvlastTime);
+            imgBadgeBessage = itemView.findViewById(R.id.imgBadgeBessage);
             tvLastMessage = itemView.findViewById(R.id.tvLastMessage);
 
         }
