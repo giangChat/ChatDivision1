@@ -1,11 +1,9 @@
 package com.rikkei.training.chat.ui;
 
 import android.os.Bundle;
-import android.os.TestLooperManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,13 +32,14 @@ import java.util.List;
 public class FragmentMessage extends Fragment {
 
     FirebaseDatabase db;
-    FirebaseUser user;
+    FirebaseUser userM;
     DatabaseReference ref;
-    TextView tvMessage;
     List<User> listUser;
     List<StatusFriends> statusFriendsList;
     RecyclerView rcvListChat;
     MainActivity mainActivity;
+    AdapterMessageChat adapterMessageChat;
+    List<Conversation> conversationList = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -53,17 +52,15 @@ public class FragmentMessage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         listUser = new ArrayList<User>();
         statusFriendsList = new ArrayList<StatusFriends>();
+        userM = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseDatabase.getInstance();
         init(view);
         getData();
     }
 
 
     public void getData() {
-        List<User> listUser1 = new ArrayList<User>();
-        List<StatusFriends> statusFriendsList1 = new ArrayList<StatusFriends>();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference().child(Constants.KEY_FRIEND).child(user.getUid());
+        DatabaseReference ref = db.getReference().child(Constants.KEY_FRIEND).child(userM.getUid());
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -71,7 +68,7 @@ public class FragmentMessage extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()
                 ) {
                     StatusFriends statusFriends = dataSnapshot.getValue(StatusFriends.class);
-                    statusFriendsList1.add(statusFriends);
+                    statusFriendsList.add(statusFriends);
                 }
                 DatabaseReference ref1 = db.getReference().child(Constants.KEY_USER);
                 ref1.addValueEventListener(new ValueEventListener() {
@@ -80,26 +77,29 @@ public class FragmentMessage extends Fragment {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()
                         ) {
                             User user = dataSnapshot.getValue(User.class);
-                            listUser1.add(user);
+                            listUser.add(user);
                         }
-                        AdapterMessageChat adapterMessageChat =
-                                new AdapterMessageChat(getConversations(listUser1, statusFriendsList1),
+                        conversationList.clear();
+                        conversationList = getListConversations(listUser, statusFriendsList);
+
+                        adapterMessageChat =
+                                new AdapterMessageChat(conversationList,
                                         getActivity(), new IClickItemFriendListener() {
-                            @Override
-                            public void onClickItemFriend(User user) {
+                                    @Override
+                                    public void onClickItemFriend(User user) {
 
-                            }
+                                    }
 
-                            @Override
-                            public void onClickItemFriend(Conversation conversation) {
-                                FragmentDetailMessage fragmentDetailMessage = new FragmentDetailMessage();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("id", conversation.getId());
-                                fragmentDetailMessage.setArguments(bundle);
-                                mainActivity.setFragment(fragmentDetailMessage, true);
-                                mainActivity.changeVisibleBottomSheet(false);
-                            }
-                        });
+                                    @Override
+                                    public void onClickItemFriend(Conversation conversation) {
+                                        FragmentDetailMessage fragmentDetailMessage = new FragmentDetailMessage();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("id", conversation.getId());
+                                        fragmentDetailMessage.setArguments(bundle);
+                                        mainActivity.setFragment(fragmentDetailMessage, true);
+                                        mainActivity.changeVisibleBottomSheet(false);
+                                    }
+                                });
                         adapterMessageChat.notifyDataSetChanged();
                         rcvListChat.setAdapter(adapterMessageChat);
                     }
@@ -118,7 +118,7 @@ public class FragmentMessage extends Fragment {
         });
     }
 
-    public List<Conversation> getConversations(List<User> users, List<StatusFriends> statusFriends) {
+    public List<Conversation> getListConversations(List<User> users, List<StatusFriends> statusFriends) {
         List<StatusFriends> statusFriendsFriended = new ArrayList<>();
         List<User> listUser1 = new ArrayList<>();
         List<Conversation> conversationList = new ArrayList<>();
@@ -135,9 +135,11 @@ public class FragmentMessage extends Fragment {
                 }
             }
         }
+
         for (StatusFriends statusFriends1 : statusFriendsFriended) {
             for (User user : listUser1) {
-                if (user.getId().equals(statusFriends1.getId())) {
+                if (statusFriends1.getId().equals(user.getId())) {
+
                     db = FirebaseDatabase.getInstance();
                     DatabaseReference refChat = db.getReference()
                             .child(Constants.KEY_CHATS).child(statusFriends1.getIdChat())
@@ -145,39 +147,61 @@ public class FragmentMessage extends Fragment {
                     refChat.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            adapterMessageChat.notifyDataSetChanged();
+                            conversationList.clear();
+                            messagesList.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()
                             ) {
                                 Messages messages = dataSnapshot.getValue(Messages.class);
                                 messagesList.add(messages);
                             }
                             int d = 0;
-                            for (Messages m : messagesList
-                            ) {
-                                if (!m.isCheckSeen()) {
+                            for (Messages m : messagesList) {
+                                if (!m.getIdSender().equals(userM.getUid()) && !m.isCheckSeen()) {
                                     d++;
                                 }
                             }
-                            Conversation conversation = new Conversation(user.getId(), user.getFullName(),
-                                    user.getImgUrl(), messagesList.get(messagesList.size() - 1).getMessage(),
-                                    d, messagesList.get(messagesList.size() - 1).getTimeLong());
-                            conversationList.add(conversation);
-                        }
+                            if (messagesList.get(messagesList.size() - 1).getIdSender().equals(userM.getUid()) && messagesList.get(messagesList.size() - 1).getType().equals("img")) {
+                                Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                        user.getImgUrl(), "Bạn đã gửi một ảnh",
+                                        d, messagesList.get(messagesList.size() - 1).getTimeLong());
+                                conversationList.add(conversation);
 
+                            } else if (messagesList.get(messagesList.size() - 1).getIdSender().equals(userM.getUid())) {
+                                Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                        user.getImgUrl(), "Bạn : " + messagesList.get(messagesList.size() - 1).getMessage(),
+                                        d, messagesList.get(messagesList.size() - 1).getTimeLong());
+                                conversationList.add(conversation);
+
+                            } else {
+                                Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                        user.getImgUrl(), messagesList.get(messagesList.size() - 1).getMessage(),
+                                        d, messagesList.get(messagesList.size() - 1).getTimeLong());
+                                conversationList.add(conversation);
+
+                            }
+                        }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
-
                 }
             }
+
         }
+
         return conversationList;
+    }
+
+    public void updateMessage(String idRoomChat) {
+        DatabaseReference refM = db.getReference().child(Constants.KEY_CHATS)
+                .child(idRoomChat).child(Constants.KEY_MESSAGES);
     }
 
     public void init(View view) {
         mainActivity = (MainActivity) getActivity();
-        tvMessage = view.findViewById(R.id.tvMessage);
         rcvListChat = view.findViewById(R.id.rcvListChat);
     }
 }

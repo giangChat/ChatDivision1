@@ -52,12 +52,6 @@ public class LoginFragment extends Fragment {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         loginRegisterActivity = (LoginRegisterActivity) getActivity();
-        String text = tvDK.getText().toString();
-        SpannableString spannableString = new SpannableString(text);
-        ForegroundColorSpan foregroundColorSpan1 = new ForegroundColorSpan(Color.RED);
-        spannableString.setSpan(foregroundColorSpan1, 18, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        btDN.setEnabled(false);
-        tvDK.setText(spannableString);
 
         edtEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -145,7 +139,7 @@ public class LoginFragment extends Fragment {
 
     public void init(View view) {
         btDN = view.findViewById(R.id.btDN);
-        tvDK = view.findViewById(R.id.tvDK);
+        tvDK = view.findViewById(R.id.tvDKNgay);
         edtEmail = view.findViewById(R.id.edtEmail);
         edtPass = view.findViewById(R.id.edtPass);
     }

@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.rikkei.training.chat.R;
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         init();
-        sharedPreferences = getSharedPreferences("language", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        changeLanguage(sharedPreferences.getString("lang", "en"));
+        //sharedPreferences = getSharedPreferences("language", MODE_PRIVATE);
+        //editor = sharedPreferences.edit();
+        //changeLanguage(sharedPreferences.getString("lang", "en"));
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_friends:
@@ -75,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
     public void init() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         viewBottom = findViewById(R.id.viewBottom);
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE) ;
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken() , 0);
     }
 
     public void setEditor(String language) {
