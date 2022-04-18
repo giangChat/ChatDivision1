@@ -17,13 +17,14 @@ public class Messages {
     private String type;
     private int status;// 1 2 3 4
 
-    public Messages(String idSender, boolean checkSeen, String message, long timeLong, String type, int status) {
-        this.idSender = idSender;
+    public Messages( boolean checkSeen,String idSender,String message,int status,  long timeLong, String type) {
         this.checkSeen = checkSeen;
+        this.idSender = idSender;
         this.message = message;
+        this.status = status;
         this.timeLong = timeLong;
         this.type = type;
-        this.status = status;
+
     }
 
     public Messages() {

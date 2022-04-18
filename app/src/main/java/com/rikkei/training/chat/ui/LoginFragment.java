@@ -123,7 +123,7 @@ public class LoginFragment extends Fragment {
                 if (task.isSuccessful()) {
                        loginRegisterActivity.goToMainActivity();
                 } else {
-
+                    Toast.makeText(getActivity(), "Sai Email hoặc Mật khẩu!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
