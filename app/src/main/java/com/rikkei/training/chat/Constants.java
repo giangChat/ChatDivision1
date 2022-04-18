@@ -1,5 +1,7 @@
 package com.rikkei.training.chat;
 
+import java.util.regex.Pattern;
+
 public class Constants {
 
     public static final String KEY_ID = "id";

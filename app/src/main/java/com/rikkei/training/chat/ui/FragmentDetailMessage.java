@@ -37,7 +37,7 @@ import java.util.List;
 
 public class FragmentDetailMessage extends Fragment {
 
-    RecyclerView rcvMessage,rcvPhotoLocal;
+    RecyclerView rcvMessage, rcvPhotoLocal;
     TextView tvTimeSendMessage;
     TextView tvUserName;
     EditText edMessage;
@@ -148,12 +148,13 @@ public class FragmentDetailMessage extends Fragment {
         });
 
     }
+
     private void createMessage() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         String message = edMessage.getText().toString().trim();
         idSend = user.getUid();
         long time = now.getTime();
-        Messages messages = new Messages(idSend, false, message, time, "text", 0);
+        Messages messages = new Messages(false, idSend, message, 0, time, "text");
         db = FirebaseDatabase.getInstance();
         ref = db.getReference()
                 .child(Constants.KEY_FRIEND)
