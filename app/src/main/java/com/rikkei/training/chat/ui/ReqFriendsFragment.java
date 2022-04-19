@@ -117,12 +117,7 @@ public class ReqFriendsFragment extends Fragment {
 
     public List<User> sortUser(List<User> userList) {
         List<User> users = new ArrayList<>();
-        Comparator<User> comparator = new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return getName(o1.getFullName()).compareTo(getName(o2.getFullName()));
-            }
-        };
+        Comparator<User> comparator = (o1, o2) -> getName(o1.getFullName()).compareTo(getName(o2.getFullName()));
         Collections.sort(userList, comparator);
         for (User u : userList) {
             users.add(u);

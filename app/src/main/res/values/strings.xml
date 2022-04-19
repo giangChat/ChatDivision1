@@ -32,12 +32,14 @@
     <string name="Birthday">NGÀY SINH</string>
     <string name="Number">SỐ ĐIỆN THOẠI</string>
     <string name="EditProfile">Chỉnh sửa thông tin</string>
-    <string name="agreePolicy_Condition">Tôi đồng ý với các chính sánh và điều kiện</string>
     <string name="agree">Đồng ý</string>
     <string name="inviteFriend">Kết bạn</string>
     <string name="INVITEFRIEND">LỜI MỜI KẾT BẠN</string>
     <string name="INVITEDFRIEND">ĐÃ GIỬ KẾT BẠN</string>
     <string name="VietNamese">Tiếng Việt</string>
+    <string name="hintyouremail" translatable="false">youremail@gmail.com</string>
+    <string name="hintPassWord" translatable="false">******</string>
+    <string name="hintFullName" translatable="false">Nguyễn Văn A</string>
     <string name="save">Lưu</string>
     <string name="English">English</string>
     <string name="TypeAMessage">Nhập tin nhắn...</string>
@@ -45,4 +47,5 @@
     <string name="sing_up_now">Đăng ký ngay</string>
     <string name="have_a_account">Đã có tài khoản?</string>
     <string name="sign_in_now">Đăng nhập ngay</string>
+    <string name="IAgreeToTheTermsAndPolicies">Tôi đồng ý với các điều khoản và chính sách</string>
 </resources>

@@ -36,10 +36,9 @@
             android:layout_marginLeft="12dp"
             android:layout_toRightOf="@+id/imgUser"
             android:fontFamily="@font/lato_bold"
-            android:text="Vu Truong Giang"
+            android:text="@string/hintFullName"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/butConfirmFriends"
@@ -51,9 +50,8 @@
             android:background="@drawable/button_comfirm_friends"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
-            android:padding="0dp"
             android:text="@string/inviteFriend"
             android:textColor="@color/white"
-            android:visibility="visible" />
+            />
     </RelativeLayout>
 </LinearLayout>

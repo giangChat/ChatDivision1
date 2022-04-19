@@ -28,6 +28,7 @@ import com.rikkei.training.chat.modle.StatusFriends;
 import com.rikkei.training.chat.modle.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -35,7 +36,6 @@ public class FragmentMessage extends Fragment {
 
     FirebaseDatabase db;
     FirebaseUser userM;
-    DatabaseReference ref;
     List<User> listUser;
     TextView textView;
     List<StatusFriends> statusFriendsList;
@@ -117,6 +117,7 @@ public class FragmentMessage extends Fragment {
                 }
             }
         }
+
         for (StatusFriends statusFriends1 : statusFriendsFriended) {
             for (User user : listUser1) {
                 if (statusFriends1.getId().equals(user.getId())) {
@@ -125,9 +126,9 @@ public class FragmentMessage extends Fragment {
                             .child(Constants.KEY_CHATS).child(statusFriends1.getIdChat())
                             .child(Constants.KEY_MESSAGES);
                     refChat.addValueEventListener(new ValueEventListener() {
-
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                             messagesList.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()
                             ) {
@@ -140,29 +141,82 @@ public class FragmentMessage extends Fragment {
                                     d++;
                                 }
                             }
-                            if (messagesList.get(messagesList.size() - 1).getIdSender().equals(userM.getUid()) && messagesList.get(messagesList.size() - 1).getType().equals("img")) {
-                                Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
-                                        user.getImgUrl(), "Bạn đã gửi một ảnh",
-                                        d, messagesList.get(messagesList.size() - 1).getTimeLong());
-                                conversationList.add(conversation);
+                            if (messagesList.get(messagesList.size() - 1).getIdSender().equals(userM.getUid())
+                                    && messagesList.get(messagesList.size() - 1).getType().equals("img")) {
+
+                                Conversation conversationPhoto = new Conversation();
+                                for (int i = 0; i < conversationList.size(); i++) {
+                                    if (statusFriends1.getId().equals(conversationList.get(i).getId())) {
+                                        conversationPhoto = conversationList.get(i);
+                                    }
+                                }
+                                if (conversationList.contains(conversationPhoto)) {
+                                    conversationList.set(conversationList.indexOf(conversationPhoto),
+                                            new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                                    user.getImgUrl(), messagesList.get(messagesList.size() - 1).getMessage(),
+                                                    d, messagesList.get(messagesList.size() - 1).getTimeLong()));
+                                } else {
+                                    Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                            user.getImgUrl(), "Bạn đã gửi một ảnh",
+                                            d, messagesList.get(messagesList.size() - 1).getTimeLong());
+                                    conversationList.add(conversation);
+                                }
+                            } else if (messagesList.get(messagesList.size() - 1).getIdSender().equals(userM.getUid())
+                                    && messagesList.get(messagesList.size() - 1).getType().equals("emoji")) {
+
+                                Conversation conversationSticker = new Conversation();
+                                for (int i = 0; i < conversationList.size(); i++) {
+                                    if (statusFriends1.getId().equals(conversationList.get(i).getId())) {
+                                        conversationSticker = conversationList.get(i);
+                                    }
+                                }
+                                if (conversationList.contains(conversationSticker)) {
+                                    conversationList.set(conversationList.indexOf(conversationSticker),
+                                            new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                                    user.getImgUrl(), messagesList.get(messagesList.size() - 1).getMessage(),
+                                                    d, messagesList.get(messagesList.size() - 1).getTimeLong()));
+                                } else {
+                                    Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                            user.getImgUrl(), "Bạn đã gửi một Sticker",
+                                            d, messagesList.get(messagesList.size() - 1).getTimeLong());
+                                    conversationList.add(conversation);
+                                }
 
                             } else if (messagesList.get(messagesList.size() - 1).getIdSender().equals(userM.getUid())) {
 
-                                Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
-                                        user.getImgUrl(), "Bạn : " + messagesList.get(messagesList.size() - 1).getMessage(),
-                                        d, messagesList.get(messagesList.size() - 1).getTimeLong());
-                                conversationList.add(conversation);
+                                Conversation conversationS = new Conversation();
+                                for (int i = 0; i < conversationList.size(); i++) {
+                                    if (messagesList.get(messagesList.size() - 1).getTimeLong() == conversationList.get(i).getLastTime()) {
+                                        conversationS = conversationList.get(i);
+                                    }
+                                }
+                                if (conversationList.contains(conversationS)) {
+
+                                    conversationList.set(conversationList.indexOf(conversationS),
+                                            new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                                    user.getImgUrl(), "Bạn : " + messagesList.get(messagesList.size() - 1).getMessage(),
+                                                    d, messagesList.get(messagesList.size() - 1).getTimeLong()));
+
+                                } else {
+                                    Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                            user.getImgUrl(), "Bạn : " + messagesList.get(messagesList.size() - 1).getMessage(),
+                                            d, messagesList.get(messagesList.size() - 1).getTimeLong());
+                                    conversationList.add(conversation);
+                                }
 
                             } else {
-                              Conversation conversationT = new Conversation();
+                                Conversation conversationT = new Conversation();
                                 for (int i = 0; i < conversationList.size(); i++) {
-                                    if(statusFriends1.getId().equals(conversationList.get(i).getId())){
+                                    if (statusFriends1.getId().equals(conversationList.get(i).getId())) {
                                         conversationT = conversationList.get(i);
                                     }
                                 }
-                                if(conversationList.contains(conversationT)){
-                                    conversationList.set(conversationList.indexOf(conversationT), conversationT);
-                                }else {
+                                if (conversationList.contains(conversationT)) {
+                                    conversationList.set(conversationList.indexOf(conversationT),
+                                            new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
+                                                    user.getImgUrl(), messagesList.get(messagesList.size() - 1).getMessage(),
+                                                    d, messagesList.get(messagesList.size() - 1).getTimeLong()));
+                                } else {
                                     Conversation conversation = new Conversation(user.getId(), user.getFullName(), statusFriends1.getIdChat(),
                                             user.getImgUrl(), messagesList.get(messagesList.size() - 1).getMessage(),
                                             d, messagesList.get(messagesList.size() - 1).getTimeLong());
@@ -170,13 +224,14 @@ public class FragmentMessage extends Fragment {
                                 }
                             }
                             adapterMessageChat.notifyDataSetChanged();
-
-
+                            List<Conversation> conversationList1 = new ArrayList<>();
+                            conversationList1.addAll(conversationList);
+                            conversationList.clear();
+                            conversationList.addAll(sortConversation(conversationList1));
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
                 }
@@ -203,6 +258,14 @@ public class FragmentMessage extends Fragment {
         });
     }
 
+    private List<Conversation> sortConversation(List<Conversation> conversationList) {
+        List<Conversation> lstConversations = new ArrayList<>();
+        Comparator comparator = (Comparator<Conversation>) (o1, o2) -> Long.compare(o2.getLastTime(), o1.getLastTime());
+        Collections.sort(conversationList, comparator);
+        lstConversations.addAll(conversationList);
+        return lstConversations;
+    }
+
     public void init(View view) {
         textView = view.findViewById(R.id.tvMessage);
         mainActivity = (MainActivity) getActivity();
@@ -210,6 +273,7 @@ public class FragmentMessage extends Fragment {
         conversationList.clear();
         adapterMessageChat = new AdapterMessageChat(conversationList,
                 getActivity(), new IClickItemFriendListener() {
+
             @Override
             public void onClickItemFriend(User user) {
             }
@@ -223,10 +287,9 @@ public class FragmentMessage extends Fragment {
                 mainActivity.setFragment(fragmentDetailMessage, true);
                 mainActivity.changeVisibleBottomSheet(false);
                 updateMessage(conversation.getIdRoomChat());
+
             }
         });
-
         rcvListChat.setAdapter(adapterMessageChat);
-
     }
 }

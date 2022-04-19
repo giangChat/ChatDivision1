@@ -1,5 +1,10 @@
 package com.rikkei.training.chat.modle;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Conversation {
     String id ;
     String fullName;
@@ -75,5 +80,31 @@ public class Conversation {
 
     public void setLastTime(long lastTime) {
         this.lastTime = lastTime;
+    }
+
+    public String setTextTimeSendMessage() {
+        DateFormat obj = new SimpleDateFormat("HH:mm");
+        DateFormat obj1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date now = new Date();
+        Date timeMessage = new Date(lastTime);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(lastTime);
+        Calendar calendarNow = Calendar.getInstance();
+        calendarNow.setTimeInMillis(now.getTime());
+        long time = now.getTime();
+        int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        int year = calendar.get(Calendar.YEAR);
+        calendarNow.setTimeInMillis(time);
+        int nowDay = calendarNow.get(Calendar.DAY_OF_YEAR);
+        int nowYear = calendarNow.get(Calendar.YEAR);
+        if(nowYear == year){
+            if(nowDay == dayOfYear ){
+                return  String.format(obj.format(timeMessage));// Messages.convertSecondsToHMm(milliseconds);
+            } else if(nowDay - dayOfYear == 1 ){
+                return "Hôm qua";
+            } else return String.format(obj1.format(timeMessage)); //Messages.convertSecondsToddMMyyy(milliseconds);
+        }else {
+            return  String.format(obj1.format(timeMessage));//Messages.convertSecondsToddMMyyy(milliseconds);
+        }
     }
 }

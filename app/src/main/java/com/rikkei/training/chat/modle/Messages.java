@@ -5,6 +5,7 @@ import com.rikkei.training.chat.Constants;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -122,9 +123,37 @@ public class Messages {
         }
         return result;
     }
-    public static String convertSecondsToHMm(long seconds) {
+    public String convertSecondsToHMm() {
         DateFormat obj = new SimpleDateFormat("HH:mm");
-        Date res = new Date(seconds);
+        Date res = new Date(timeLong);
         return String.format(obj.format(res));
     }
+    public String convertSecondsToddMMyyy() {
+        DateFormat obj = new SimpleDateFormat("dd/MM/yyyy");
+        Date res = new Date(timeLong);
+        return String.format(obj.format(res));
+    }
+    public String setTextTimeSendMessage() {
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeLong);
+        Calendar calendarNow = Calendar.getInstance();
+        calendarNow.setTimeInMillis(now.getTime());
+        long time = now.getTime();
+        int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        int year = calendar.get(Calendar.YEAR);
+        calendarNow.setTimeInMillis(time);
+        int nowDay = calendarNow.get(Calendar.DAY_OF_YEAR);
+        int nowYear = calendarNow.get(Calendar.YEAR);
+        if(nowYear == year){
+            if(nowDay == dayOfYear ){
+                return  convertSecondsToHMm();
+            } else if(nowDay - dayOfYear == 1 ){
+                return "Hôm qua";
+            } else return convertSecondsToddMMyyy();
+        }else {
+            return  convertSecondsToddMMyyy();
+        }
+    }
+
 }

@@ -9,8 +9,10 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
@@ -32,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         init();
-        //sharedPreferences = getSharedPreferences("language", MODE_PRIVATE);
-        //editor = sharedPreferences.edit();
-        //changeLanguage(sharedPreferences.getString("lang", "en"));
+        sharedPreferences = getSharedPreferences("language", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        changeLanguage(sharedPreferences.getString("lang", "en"));
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_friends:

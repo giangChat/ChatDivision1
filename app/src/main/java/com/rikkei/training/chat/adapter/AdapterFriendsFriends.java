@@ -62,12 +62,7 @@ public class AdapterFriendsFriends extends RecyclerView.Adapter<AdapterFriendsFr
                 holder.tvNameFirst.setText(name);
             }
         }
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iClickItemFriendListener.onClickItemFriend(user);
-            }
-        });
+        holder.linearLayout.setOnClickListener(v -> iClickItemFriendListener.onClickItemFriend(user));
     }
 
     @Override

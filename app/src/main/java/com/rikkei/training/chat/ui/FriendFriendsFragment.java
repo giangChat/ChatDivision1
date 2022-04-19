@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rikkei.training.chat.Constants;
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.a.IClickItemFriendListener;
 import com.rikkei.training.chat.adapter.AdapterFriendsFriends;
@@ -88,7 +89,7 @@ public class FriendFriendsFragment extends Fragment {
         databaseReference1.child("friend").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                statusFriendsList.clear();
                 for (DataSnapshot data : snapshot.getChildren()) {
                     StatusFriends statusFriends = data.getValue(StatusFriends.class);
                     statusFriendsList.add(statusFriends);
@@ -160,5 +161,23 @@ public class FriendFriendsFragment extends Fragment {
                 }
             }
         return sortUser(userFriends);
+    }
+    private void updateMessage(String idRoomChat) {
+        DatabaseReference refM = firebaseDatabase.getReference().child(Constants.KEY_CHATS)
+                .child(idRoomChat).child(Constants.KEY_MESSAGES);
+        refM.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    if (!data.child("idSender").getValue(String.class).equals(user.getUid()) && !data.child("checkSeen").getValue(Boolean.class)) {
+                        refM.child(data.getKey()).child("checkSeen").setValue(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

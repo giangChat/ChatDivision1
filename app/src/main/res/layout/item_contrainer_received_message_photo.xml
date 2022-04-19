@@ -5,44 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
-    android:id="@+id/itemRecived"
+    android:id="@+id/itemRecivedPhoto"
     >
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgAvatarReceived"
+        android:id="@+id/imgAvatarReceivedPhoto"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_avatar_user_default_while_large_icon"
         android:background="@drawable/bg_item_avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/imgMessageReceived"
+        app:layout_constraintBottom_toBottomOf="@id/imgMessageReceivedPhoto"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/imgMessageReceived"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imgMessageReceivedPhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:background="@drawable/background_received_message_single"
-        android:padding="18sp"
-        android:fontFamily="@font/lato"
-        android:textColor="@color/black"
+        android:src="@drawable/emoji0"
         app:layout_constrainedWidth="true"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.75"
-        app:layout_constraintStart_toEndOf="@id/imgAvatarReceived"
+        app:layout_constraintStart_toEndOf="@id/imgAvatarReceivedPhoto"
         app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
-        android:id="@+id/tvDateTime"
+        android:id="@+id/tvDateTimeReceivedPhoto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1sp"
         android:textColor="@color/gray_cancel_search_message"
         android:fontFamily="@font/lato"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/imgMessageReceived"
-        app:layout_constraintTop_toBottomOf="@id/imgMessageReceived"
+        app:layout_constraintStart_toStartOf="@+id/imgMessageReceivedPhoto"
+        app:layout_constraintTop_toBottomOf="@id/imgMessageReceivedPhoto"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

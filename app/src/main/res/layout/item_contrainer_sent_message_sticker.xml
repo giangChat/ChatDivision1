@@ -4,24 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
+    android:id="@+id/itemSentSticker"
     >
 
     <ImageView
-        android:id="@+id/imgMessageSentImg"
+        android:id="@+id/imgMessageSentSticker"
         android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:padding="18sp"
-        android:src="@drawable/no_img"
+        android:layout_height="150dp"
+        android:src="@drawable/emoji0"
         app:layout_constrainedWidth="true"
-        android:scaleType="center"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
-        android:id="@+id/tvDateTimeSentImg"
+        android:id="@+id/tvDateTimeSentSticker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato"
@@ -29,6 +26,6 @@
         android:textColor="@color/gray_cancel_search_message"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgMessageSentImg" />
+        app:layout_constraintTop_toBottomOf="@+id/imgMessageSentSticker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,26 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
-    android:id="@+id/itemSent"
+    android:id="@+id/itemSentPhoto"
     >
 
-    <TextView
-        android:id="@+id/textMessageSent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_sent_message_single"
-        android:padding="18sp"
-        android:fontFamily="@font/lato"
-        android:textColor="@color/white"
+    <ImageView
+        android:id="@+id/imgMessageSentPhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/emoji0"
         app:layout_constrainedWidth="true"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
-        android:id="@+id/tvDateTimeSent"
+        android:id="@+id/tvDateTimeSentPhoto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato"
@@ -31,6 +26,6 @@
         android:textColor="@color/gray_cancel_search_message"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMessageSent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgMessageSentPhoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

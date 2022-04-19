@@ -3,8 +3,8 @@
     <string name="Awesome">Awesome chat experience</string>
     <string name="login">Log in</string>
     <string name="LogIn">Log In</string>
-    <string name="Regis">Regis</string>
-    <string name="REGIS">REGIS</string>
+    <string name="Regis">Sign Up</string>
+    <string name="REGIS">SIGN UP</string>
     <string name="email">EMAIL</string>
     <string name="Password">PASSWORD</string>
     <string name="forgetPassword">Forget password?</string>
@@ -31,9 +31,8 @@
     <string name="Birthday">BIRTHDAY</string>
     <string name="Number">PHONE NUMBER</string>
     <string name="EditProfile">Edit information</string>
-    <string name="agreePolicy_Condition">Tôi đồng ý với các chính sánh và điều kiện</string>
     <string name="agree">Agree</string>
-    <string name="inviteFriend">Invite</string>
+    <string name="inviteFriend">ADD</string>
     <string name="INVITEFRIEND">Add friends</string>
     <string name="INVITEDFRIEND">Confirm friends</string>
     <string name="VietNamese">VietNamese</string>
@@ -44,4 +43,5 @@
     <string name="sing_up_now">Sign up now</string>
     <string name="have_a_account">Have a account?</string>
     <string name="sign_in_now">Sign in now</string>
+    <string name="IAgreeToTheTermsAndPolicies">" I agree to the terms and policies"</string>
 </resources>
