@@ -39,7 +39,7 @@
             android:text="Vu Truong Giang"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/butConfirmFriends"

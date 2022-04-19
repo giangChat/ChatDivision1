@@ -55,6 +55,7 @@ public class AdapterInviteFriends extends RecyclerView.Adapter<AdapterInviteFrie
         holder.tvNameFirst.setVisibility(View.GONE);
         holder.butConfirm.setBackgroundResource(R.drawable.button_confirm_friend_type2);
         holder.butConfirm.setText("Hủy");
+        holder.butConfirm.setTextColor(Color.BLACK);
         holder.butConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
