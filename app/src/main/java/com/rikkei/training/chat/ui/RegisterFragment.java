@@ -1,5 +1,6 @@
 package com.rikkei.training.chat.ui;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -184,6 +185,9 @@ public class RegisterFragment extends Fragment {
                                     "default", "default", "default", edtEmail.getText().toString(),
                                     edtPass.getText().toString());
                             ref.child("user").child(user.getUid()).setValue(user1);
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
 
                         } else {
                             Toast.makeText(getActivity(), "Email này đã được đăng ký tài khoản!", Toast.LENGTH_SHORT).show();

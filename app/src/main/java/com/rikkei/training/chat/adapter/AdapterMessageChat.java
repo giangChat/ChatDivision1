@@ -1,6 +1,7 @@
 package com.rikkei.training.chat.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class AdapterMessageChat extends RecyclerView.Adapter<AdapterMessageChat.
     Context context;
     private IClickItemFriendListener iClickItemFriendListener;
 
+
     public AdapterMessageChat(List<Conversation> userList, Context context, IClickItemFriendListener iClickItemFriendListener) {
         this.conversationList = userList;
         this.context = context;
@@ -47,26 +49,32 @@ public class AdapterMessageChat extends RecyclerView.Adapter<AdapterMessageChat.
             Glide.with(context).load(conversation.getImgPhoto()).into(holder.imageUserMessage);
         }
 
-        holder.tvlastTime.setText(Messages.convertSecondsToHMm(conversation.getLastTime()));
+        holder.tvlastTime.setText(Messages.setTextTimeSendMessage(conversation.getLastTime()));
         holder.tvNameUserMessage.setText(conversation.getFullName());
-        if (conversation.getLastMessage().length() > 20 ) {
-            String text = conversation.getLastMessage().substring(0, 20) + "...";
+        if (conversation.getLastMessage().length() >= 50) {
+            String text = conversation.getLastMessage().substring(0, 50) + "...";
             holder.tvLastMessage.setText(text);
         } else {
             holder.tvLastMessage.setText(conversation.getLastMessage());
         }
-        if (conversation.getCoutUnSeen() >= 1 && conversation.getCoutUnSeen() <= 9) {
-            holder.tvBadgeMessage.setText(String.valueOf(conversation.getCoutUnSeen()));
-            holder.tvBadgeMessage.setVisibility(View.VISIBLE);
-            holder.imgBadgeBessage.setVisibility(View.VISIBLE);
-        } else if (conversation.getCoutUnSeen() > 9) {
+        if (conversation.getCoutUnSeen() > 9 ) {
             holder.tvBadgeMessage.setText("9+");
             holder.tvBadgeMessage.setVisibility(View.VISIBLE);
             holder.imgBadgeBessage.setVisibility(View.VISIBLE);
+            holder.tvLastMessage.setTextColor(Color.BLACK);
+
+        } else if (conversation.getCoutUnSeen() >= 1) {
+            holder.tvBadgeMessage.setText(String.valueOf(conversation.getCoutUnSeen()));
+            holder.tvBadgeMessage.setVisibility(View.VISIBLE);
+            holder.imgBadgeBessage.setVisibility(View.VISIBLE);
+            holder.tvLastMessage.setTextColor(Color.BLACK);
+            holder.tvlastTime.setTextColor(Color.BLACK);
         } else {
             holder.tvBadgeMessage.setText("");
             holder.tvBadgeMessage.setVisibility(View.INVISIBLE);
             holder.imgBadgeBessage.setVisibility(View.INVISIBLE);
+            holder.tvLastMessage.setTextColor(Color.GRAY);
+            holder.tvlastTime.setTextColor(Color.GRAY);
         }
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
