@@ -13,4 +13,5 @@
     <color name="gray">#D2D2D2</color>
     <color name="gray_detail_message">#E5E5E5</color>
     <color name="gray_cancel_search_message">#999999</color>
+    <color name="gray_white">#F6F6F6</color>
 </resources>

@@ -1,41 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <TextView
-        android:text="@string/INVITEFRIEND"
+        android:id="@+id/tvInvitefriend"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
         android:fontFamily="@font/lato_bold"
         android:gravity="center|left"
-        android:layout_marginLeft="12dp"
-        android:textColor="#706A6A"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:text="@string/INVITEFRIEND"
+        android:textColor="@color/gray_cancel_search_message"
+        app:layout_constraintBottom_toTopOf="@+id/rcvDataReqAgreeFriend"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvDataReqAgreeFriend"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tvInvitefriend"
+
+        />
+
     <View
-        android:background="#706A6A"
+        android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="3dp"
+        android:background="@color/gray_cancel_search_message"
+        app:layout_constraintTop_toBottomOf="@+id/rcvDataReqAgreeFriend" />
+
     <TextView
-        android:text="@string/INVITEDFRIEND"
+        android:id="@+id/tvInvitefriended"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
         android:fontFamily="@font/lato_bold"
         android:gravity="center|left"
-        android:layout_marginLeft="12dp"
-        android:textColor="#706A6A"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:text="@string/INVITEDFRIEND"
+        android:textColor="@color/gray_cancel_search_message"
+        app:layout_constraintBottom_toTopOf="@+id/rcvDataReqInvitedFriend"
+        app:layout_constraintLeft_toLeftOf="@+id/rcvDataReqAgreeFriend"
+        app:layout_constraintRight_toRightOf="@+id/rcvDataReqAgreeFriend"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvDataReqInvitedFriend"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="@+id/tvInvitefriended"
+        app:layout_constraintRight_toRightOf="@+id/tvInvitefriended"
+        app:layout_constraintTop_toBottomOf="@+id/tvInvitefriended" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,13 +9,9 @@
     <ImageView
         android:id="@+id/imgMessageSentImg"
         android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:padding="18sp"
-        android:src="@drawable/no_img"
+        android:layout_height="150dp"
+        android:src="@drawable/emoji0"
         app:layout_constrainedWidth="true"
-        android:scaleType="center"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />

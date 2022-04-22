@@ -28,31 +28,34 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rikkei.training.chat.Constants;
 import com.rikkei.training.chat.R;
+import com.rikkei.training.chat.a.IClickItemDetailMessage;
+import com.rikkei.training.chat.a.IClickItemEmojiListener;
 import com.rikkei.training.chat.adapter.AdapterDetailMessage;
+import com.rikkei.training.chat.adapter.AdapterEmoji;
 import com.rikkei.training.chat.modle.Messages;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class FragmentDetailMessage extends Fragment {
 
-    RecyclerView rcvMessage, rcvPhotoLocal;
+    RecyclerView rcvMessage, rcvImgEmoji;
     TextView tvTimeSendMessage;
     TextView tvUserName;
     EditText edMessage;
-    ImageView imgSend, imgAvatar, imgBack, imgPhotoLocal;
+    ImageView imgSend, imgAvatar, imgBack, imgEmoji;
     FirebaseDatabase db;
     FirebaseUser user;
     DatabaseReference ref;
-    String imgUrlReceived;
+    String imgUrlReceived = "";
     String idReceived;
     String idSend;
     String idRoomChat;
     MainActivity mainActivity;
     AdapterDetailMessage adapterDetailMessage;
     List<Messages> messagesList;
-    List<Messages> messagesListHandel = new ArrayList<>();
     Date now = new Date();
 
     @Nullable
@@ -70,11 +73,24 @@ public class FragmentDetailMessage extends Fragment {
         if (bundle != null) {
             idReceived = bundle.getString("id");
         }
-
         messagesList = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseDatabase.getInstance();
         getMessage();
+        adapterDetailMessage = new AdapterDetailMessage(messagesList, imgUrlReceived, mainActivity, new IClickItemDetailMessage() {
+            @Override
+            public void onClickItemDetailMessage() {
+                rcvImgEmoji.setVisibility(View.GONE);
+                mainActivity.hideKeyboard(view);
+                imgEmoji.setImageResource(R.drawable.ic_emoji_gray_icon);
+            }
+
+            @Override
+            public void onClickItemTextlMessage() {
+
+            }
+        });
+        rcvMessage.setAdapter(adapterDetailMessage);
         ref = db.getReference().child(Constants.KEY_USER).child(idReceived);
         ref.child(Constants.KEY_IMG).addValueEventListener(new ValueEventListener() {
             @Override
@@ -127,7 +143,7 @@ public class FragmentDetailMessage extends Fragment {
             @Override
             public void onClick(View v) {
                 messagesList.clear();
-                createMessage();
+                createMessage("text",null);
                 edMessage.setText("");
             }
         });
@@ -140,21 +156,44 @@ public class FragmentDetailMessage extends Fragment {
 
             }
         });
-        imgPhotoLocal.setOnClickListener(new View.OnClickListener() {
+        imgEmoji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rcvPhotoLocal.setVisibility(View.INVISIBLE);
+                String PACKAGE_NAME = mainActivity.getApplicationContext().getPackageName();
+                List<Integer> integers = new ArrayList<>();
+                for(int i = 0; i < 10; i++){
+                    int in = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+"emoji"+i,null, null);
+                    integers.add(in);
+                }
+                AdapterEmoji adapterEmoji = new AdapterEmoji(mainActivity, integers, new IClickItemEmojiListener() {
+                    @Override
+                    public void onClickItemEmoji(int emoji) {
+                        createMessage("emoji",String.valueOf(emoji));
+                    }
+                });
+
+                rcvImgEmoji.setAdapter(adapterEmoji);
+                imgEmoji.setImageResource(R.drawable.ic_emoji_blue_icon);
+                rcvImgEmoji.setVisibility(View.VISIBLE);
+                mainActivity.hideKeyboard(view);
+                rcvMessage.scrollToPosition(messagesList.size() - 1);
+
             }
         });
 
     }
 
-    private void createMessage() {
+    private void createMessage(String type, String codeEmoji) {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String message = edMessage.getText().toString().trim();
+        String message ="";
+        if(type.equals("text")){
+            message = edMessage.getText().toString().trim();
+        }else if(type.equals("emoji")){
+            message = codeEmoji;
+        }
         idSend = user.getUid();
         long time = now.getTime();
-        Messages messages = new Messages(false, idSend, message, 0, time, "text");
+        Messages messages = new Messages(false, idSend, message, 0, time, type);
         db = FirebaseDatabase.getInstance();
         ref = db.getReference()
                 .child(Constants.KEY_FRIEND)
@@ -165,23 +204,20 @@ public class FragmentDetailMessage extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DatabaseReference chatRef = db.getReference();
-                if (!snapshot.getValue().toString().equals("default")) {
-                    chatRef.child(Constants.KEY_CHATS).child(snapshot.getValue().toString()).child(Constants.KEY_MESSAGES).push().setValue(messages);
-                } else {
+                if (snapshot.getValue().toString().equals("default")) {
                     idRoomChat = idSend + idReceived;
-                    chatRef.child(Constants.KEY_CHATS).child(idRoomChat).child(Constants.KEY_MESSAGES).push().setValue(messages);
                     chatRef.child(Constants.KEY_FRIEND).child(idSend).child(idReceived).child(Constants.KEY_ID_CHAT).setValue(idRoomChat);
                     chatRef.child(Constants.KEY_FRIEND).child(idReceived).child(idSend).child(Constants.KEY_ID_CHAT).setValue(idRoomChat);
+                } else {
+                    chatRef.child(Constants.KEY_CHATS).child(snapshot.getValue().toString()).child(Constants.KEY_MESSAGES).push().setValue(messages);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
     }
-
     public void getMessage() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         idSend = user.getUid();
@@ -207,11 +243,11 @@ public class FragmentDetailMessage extends Fragment {
                                 Messages message = data.getValue(Messages.class);
                                 messagesList.add(message);
                             }
-                            messagesListHandel = Messages.handle(messagesList);
-                            adapterDetailMessage = new AdapterDetailMessage(messagesListHandel, imgUrlReceived, mainActivity);
+                            List<Messages>  messagesListHandel = Messages.handle(messagesList);
+                            messagesList.clear();
+                            messagesList.addAll(messagesListHandel);
+                            tvTimeSendMessage.setText(Messages.setTextTimeSendMessage(messagesList.get(messagesList.size() - 1).getTimeLong()));
                             adapterDetailMessage.notifyDataSetChanged();
-//                            tvTimeSendMessage.setText(setTextTimeSendMessage(messagesList.get(messagesList.size() - 1)));
-                            rcvMessage.setAdapter(adapterDetailMessage);
                             rcvMessage.scrollToPosition(messagesList.size() - 1);
                         }
 
@@ -222,7 +258,6 @@ public class FragmentDetailMessage extends Fragment {
                     });
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(mainActivity, "Error Loading...", Toast.LENGTH_SHORT).show();
@@ -230,20 +265,10 @@ public class FragmentDetailMessage extends Fragment {
         });
     }
 
-//    public String setTextTimeSendMessage(Messages messages) {
-//        long currentTime = now.getTime();
-//        long timeDifference = currentTime - messages.getTimeLong();
-//        if (timeDifference <= 864000000) {
-//            return "Hôm nay";
-//        } else if (timeDifference > 86401000) {
-//            return "Hôm qua";
-//        } else return "dd:MM:yyy";
-//    }
-
     public void init(View view) {
 
         mainActivity = (MainActivity) getActivity();
-        imgPhotoLocal = view.findViewById(R.id.imgPhotoLocal);
+        imgEmoji = view.findViewById(R.id.imgEmoji);
         imgBack = view.findViewById(R.id.imgBack);
         rcvMessage = view.findViewById(R.id.rcvDetailMessage);
         tvUserName = view.findViewById(R.id.tvUserName);
@@ -251,6 +276,6 @@ public class FragmentDetailMessage extends Fragment {
         imgSend = view.findViewById(R.id.imgSend);
         imgAvatar = view.findViewById(R.id.imgAvatar);
         tvTimeSendMessage = view.findViewById(R.id.tvTimeSendMessage);
-        rcvPhotoLocal = view.findViewById(R.id.rcvlistPhotoLocal);
+        rcvImgEmoji = view.findViewById(R.id.rcvImgEmoji);
     }
 }
