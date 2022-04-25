@@ -206,7 +206,7 @@ public class FragmentDetailMessage extends Fragment {
                         createMessage("img", null, url);
                     })).addOnFailureListener(e -> Toast.makeText(mainActivity, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 });
-
+                mainActivity.hideKeyboard(view);
                 rcvImg.setAdapter(adapterPhoto);
                 rcvImg.setVisibility(View.VISIBLE);
                 rcvMessage.scrollToPosition(messagesList.size() - 1);
@@ -287,9 +287,9 @@ public class FragmentDetailMessage extends Fragment {
                                 messagesList.add(message);
                             }
                             tvTimeSendMessage.setText(messagesList.get(messagesList.size() - 1).setTextTimeSendMessage());
-                            List<Messages> messagesListHandel = Messages.handle(messagesList);
-                            messagesList.clear();
-                            messagesList.addAll(messagesListHandel);
+                            Messages.handle(messagesList);
+                            //messagesList.clear();
+                           // messagesList.addAll(messagesListHandel);
                             rcvMessage.scrollToPosition(messagesList.size() - 1);
                             adapterDetailMessage = new AdapterDetailMessage(messagesList, imgUrlReceived, mainActivity, () -> {
                                 rcvImg.setVisibility(View.GONE);

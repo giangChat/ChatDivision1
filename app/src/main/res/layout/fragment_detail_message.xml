@@ -96,8 +96,9 @@
         android:paddingRight="30dp"
         android:paddingBottom="16dp"
         android:textFontWeight="500"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/rcvImgSticker"
+        app:layout_constraintBottom_toTopOf="@id/rcvImg"
         app:layout_constraintLeft_toRightOf="@id/imgPhoto"
         app:layout_constraintRight_toLeftOf="@+id/imgSend" />
 
@@ -138,7 +139,7 @@
         app:layout_constraintTop_toTopOf="@id/viewDetailMessage" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvImgSticker"
+        android:id="@+id/rcvImg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"

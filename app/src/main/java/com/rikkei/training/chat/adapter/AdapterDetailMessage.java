@@ -241,7 +241,7 @@ class MessageReceiveStickerViewHolder extends RecyclerView.ViewHolder {
     public MessageReceiveStickerViewHolder(@NonNull View itemView) {
         super(itemView);
         imgAvatarReceivedSticker = itemView.findViewById(R.id.imgAvatarReceivedSticker);
-        imgMessageReceivedSticker = itemView.findViewById(R.id.imgMessageReceived);
+        imgMessageReceivedSticker = itemView.findViewById(R.id.imgMessageReceivedSticker);
         tvDateTimeReceivedSticker = itemView.findViewById(R.id.tvDateTimeReceivedSticker);
         itemRecivedSticker = itemView.findViewById(R.id.itemRecivedSticker);
     }

@@ -19,12 +19,7 @@ public class SlapshActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slapsh);
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                    nextActivity();
-            }
-        }, 2000);
+        handler.postDelayed(() -> nextActivity(), 2000);
     }
 
     private void nextActivity() {
