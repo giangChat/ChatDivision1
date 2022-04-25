@@ -42,6 +42,7 @@ public class AdapterDetailMessage extends RecyclerView.Adapter<RecyclerView.View
         this.iClickItemDetailMessage = iClickItemDetailMessage;
     }
 
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -245,21 +246,6 @@ class MessageReceiveStickerViewHolder extends RecyclerView.ViewHolder {
         itemRecivedSticker = itemView.findViewById(R.id.itemRecivedSticker);
     }
 }
-
-class MessageReceiveViewHolder extends RecyclerView.ViewHolder {
-    ImageView imgAvatar;
-    TextView tvMessageReceived;
-    TextView tvDateTimeReceived;
-    ConstraintLayout itemRecived;
-
-    public MessageReceiveViewHolder(@NonNull View itemView) {
-        super(itemView);
-        imgAvatar = itemView.findViewById(R.id.imgAvatarReceived);
-        tvMessageReceived = itemView.findViewById(R.id.imgMessageReceived);
-        tvDateTimeReceived = itemView.findViewById(R.id.tvDateTime);
-        itemRecived = itemView.findViewById(R.id.itemRecived);
-    }
-}
 class MessageReceivePhotoViewHolder extends RecyclerView.ViewHolder {
     ImageView imgAvatarReceivedPhoto;
     ImageView imgMessageReceivedPhoto;
@@ -274,4 +260,21 @@ class MessageReceivePhotoViewHolder extends RecyclerView.ViewHolder {
         itemRecivedPhoto = itemView.findViewById(R.id.itemRecivedPhoto);
     }
 }
+class MessageReceiveViewHolder extends RecyclerView.ViewHolder {
+    ImageView imgAvatar;
+    TextView tvMessageReceived;
+    TextView tvDateTimeReceived;
+    ConstraintLayout itemRecived;
+
+    public MessageReceiveViewHolder(@NonNull View itemView) {
+        super(itemView);
+        imgAvatar = itemView.findViewById(R.id.imgAvatarReceived);
+        tvMessageReceived = itemView.findViewById(R.id.imgMessageReceived);
+        tvDateTimeReceived = itemView.findViewById(R.id.tvDateTimeReceived);
+        itemRecived = itemView.findViewById(R.id.itemRecived);
+    }
+}
+
+
+
 

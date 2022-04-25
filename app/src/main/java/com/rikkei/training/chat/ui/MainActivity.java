@@ -87,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE) ;
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken() , 0);
     }
+    public void checkKeyBord(View view){
+        view = findViewById(R.id.mainActivity);
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+
+            }
+        });
+    }
 
     public void setEditor(String language) {
         editor.putString("lang", language);

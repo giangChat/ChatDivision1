@@ -27,7 +27,6 @@ public class AdapterMessageChat extends RecyclerView.Adapter<AdapterMessageChat.
     Context context;
     private IClickItemFriendListener iClickItemFriendListener;
 
-
     public AdapterMessageChat(List<Conversation> userList, Context context, IClickItemFriendListener iClickItemFriendListener) {
         this.conversationList = userList;
         this.context = context;

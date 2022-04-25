@@ -36,6 +36,7 @@ public class FragmentMessage extends Fragment {
 
     FirebaseDatabase db;
     FirebaseUser userM;
+    DatabaseReference ref;
     List<User> listUser;
     TextView textView;
     List<StatusFriends> statusFriendsList;
@@ -117,7 +118,6 @@ public class FragmentMessage extends Fragment {
                 }
             }
         }
-
         for (StatusFriends statusFriends1 : statusFriendsFriended) {
             for (User user : listUser1) {
                 if (statusFriends1.getId().equals(user.getId())) {
@@ -126,9 +126,9 @@ public class FragmentMessage extends Fragment {
                             .child(Constants.KEY_CHATS).child(statusFriends1.getIdChat())
                             .child(Constants.KEY_MESSAGES);
                     refChat.addValueEventListener(new ValueEventListener() {
+
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                             messagesList.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()
                             ) {
@@ -273,7 +273,6 @@ public class FragmentMessage extends Fragment {
         conversationList.clear();
         adapterMessageChat = new AdapterMessageChat(conversationList,
                 getActivity(), new IClickItemFriendListener() {
-
             @Override
             public void onClickItemFriend(User user) {
             }
@@ -287,7 +286,6 @@ public class FragmentMessage extends Fragment {
                 mainActivity.setFragment(fragmentDetailMessage, true);
                 mainActivity.changeVisibleBottomSheet(false);
                 updateMessage(conversation.getIdRoomChat());
-
             }
         });
         rcvListChat.setAdapter(adapterMessageChat);

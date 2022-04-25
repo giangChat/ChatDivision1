@@ -50,8 +50,9 @@
             android:background="@drawable/button_comfirm_friends"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
+            android:padding="0dp"
             android:text="@string/inviteFriend"
             android:textColor="@color/white"
-            />
+            android:visibility="visible" />
     </RelativeLayout>
 </LinearLayout>

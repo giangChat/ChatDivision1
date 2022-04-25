@@ -27,10 +27,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,13 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 import com.rikkei.training.chat.Constants;
 import com.rikkei.training.chat.R;
-import com.rikkei.training.chat.a.IClickItemDetailMessage;
 import com.rikkei.training.chat.adapter.AdapterDetailMessage;
 import com.rikkei.training.chat.adapter.AdapterPhoto;
 import com.rikkei.training.chat.adapter.AdapterSticker;
@@ -94,7 +86,6 @@ public class FragmentDetailMessage extends Fragment {
         if (bundle != null) {
             idReceived = bundle.getString("id");
         }
-
         messagesList = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         idSend = user.getUid();

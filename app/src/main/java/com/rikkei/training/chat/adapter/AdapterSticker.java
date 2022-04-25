@@ -12,13 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rikkei.training.chat.R;
 import com.rikkei.training.chat.a.IClickItemEmojiListener;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterSticker extends RecyclerView.Adapter<StickerViewHolder> {
     Context context;
-    List<Integer> lstEmoji = new ArrayList<>();
+    List<Integer> lstEmoji;
     IClickItemEmojiListener iClickItemEmojiListener;
 
     public AdapterSticker(Context context, List<Integer> lstEmoji, IClickItemEmojiListener iClickItemEmojiListener) {

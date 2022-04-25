@@ -15,11 +15,11 @@
         android:src="@drawable/ic_avatar_user_default_while_large_icon"
         android:background="@drawable/bg_item_avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/imgMessageReceived"
+        app:layout_constraintBottom_toBottomOf="@id/imgMessageReceivedSticker"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imgMessageReceived"
+        android:id="@+id/imgMessageReceivedSticker"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="4dp"
@@ -36,8 +36,8 @@
         android:textColor="@color/gray_cancel_search_message"
         android:fontFamily="@font/lato"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/imgMessageReceived"
-        app:layout_constraintTop_toBottomOf="@id/imgMessageReceived"
+        app:layout_constraintStart_toStartOf="@+id/imgMessageReceivedSticker"
+        app:layout_constraintTop_toBottomOf="@id/imgMessageReceivedSticker"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
